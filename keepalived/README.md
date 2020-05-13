@@ -10,3 +10,16 @@ We have various solutions:
 
 And this time I tried **keepalived** service.
 I configured two mysql servers. Both servers are master. I know this is a complicated solution. But I decided to use them as active/passive. It allows me to use them safely.
+### Instalation:
+```
+apt-get install keepalived
+```
+### Configuration file:
+```
+$ sudo vim /etc/keepalived/keepalived.conf
+```
+### Monitoring service:
+```
+$ sudo tail -f /var/log/syslog | grep Keepalived
+$ sudo systemctl status keepalived
+```
