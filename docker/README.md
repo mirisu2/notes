@@ -11,10 +11,10 @@ apt-get update
 apt-get install docker-ce docker-ce-cli containerd.io
 ```
 # Manage Docker as a non-root user
-usermod -aG docker yourUserName
+```sudo usermod -aG docker yourUserName```
 
 # Print version information and quit
-docker -v
+```$ docker -v```
 
 # .bashrc
 ```
