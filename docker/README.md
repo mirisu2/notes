@@ -17,19 +17,35 @@ apt-get install docker-ce docker-ce-cli containerd.io
 ```$ docker -v```
 # Print help message
 ```
-docker --help
+$ docker --help
 
-docker info
-docker system info
-docker stats
+$ docker info
+$ docker system info
+$ docker stats
 
 $ sudo vim /lib/systemd/system/docker.service
 ExecStart=/usr/bin/dockerd -H 0.0.0.0:2375
-sudo systemctl daemon-reload
-sudo service docker restart
-docker -H 127.0.0.1:2375 run hello-world
+$ sudo systemctl daemon-reload
+$ sudo service docker restart
+$ docker -H 127.0.0.1:2375 run hello-world
 ```
 # .bashrc
 ```export DOCKER_HOST=127.0.0.1:2375```
 # Verify that Docker Engine is installed correctly by running the "hello-world" image
 ```$ docker run hello-world```
+# Search the Docker Hub for images
+```$ docker search imageName```
+# What images do I have locally
+```$ docker images```
+# Show only ID of images
+```$ docker images -q```
+# List containers
+```$ docker ps [-aq]```
+# Delete container
+```$ docker rm <id>/<name>```
+# Delete local images
+```$ docker rmi [-f] <id>/<name>```
+# Delete all images
+```$ docker rmi $(docker images -q)```
+# Stop one or more running containers
+```$ docker stop CONTAINER```
