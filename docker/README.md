@@ -199,3 +199,42 @@ https://docs.docker.com/config/containers/logging/local/
 * etwlogs	-Writes log messages as Event Tracing for Windows (ETW) events. Only available on Windows platforms.
 * gcplogs	-Writes log messages to Google Cloud Platform (GCP) Logging.
 * logentries	-Writes log messages to Rapid7 Logentries.
+
+## Private Docker registry
+```
+$ docker -H 127.0.0.1:2375 run -d -p 5000:5000 --restart=always -v /home/john:/var/lib/registry --name registry registry:2
+$ docker -H 127.0.0.1:2375 tag my-php-apache-app:v5.6 localhost:5000/my-php-apache-app:v5.6
+$ docker -H 127.0.0.1:2375 push localhost:5000/my-php-apache-app:v5.6
+```
+в итоге создается в /home/john/docker/registry/v2/repositories
+```
+docker -H 127.0.0.1:2375 images
+REPOSITORY                         TAG                 IMAGE ID            CREATED             SIZE
+my-php-apache-app                  v5.6                a7540f835cb7        2 weeks ago         672MB
+localhost:5000/my-php-apache-app   v5.6                a7540f835cb7        2 weeks ago         672MB
+
+$ docker -H 127.0.0.1:2375 run -d --rm -p 8085:80 --name my-php56-app localhost:5000/my-php-apache-app:v5.6
+```
+https://gadelkareem.com/2018/10/23/deploy-a-docker-registry-with-letsencrypt-certificates-on-ubuntu-18-04/
+```
+sudo certbot certonly --standalone --preferred-challenges http --non-interactive --staple-ocsp --agree-tos \
+-m gde@to.tam -d mydomain.host
+
+cd /etc/letsencrypt/live/mydomain.host
+cp privkey.pem domain.key
+cat cert.pem chain.pem > domain.crt
+chmod 777 domain.*
+
+$ mkdir /home/john/docker-registry
+
+$ docker run -d -p 443:5000 --restart=always --name registry \
+  -v /etc/letsencrypt/live/mydomain.host:/certs \
+  -v /mnt/docker-registry:/var/lib/registry \
+  -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt \
+  -e REGISTRY_HTTP_TLS_KEY=/certs/domain.key \
+  registry:latest
+	
+docker build -t mydomain.host/notify:v0.0.1 .
+docker push mydomain.host/notify:v0.0.1
+curl https://mydomain.host/v2/_catalog
+```
