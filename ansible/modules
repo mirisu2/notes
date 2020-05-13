@@ -1,0 +1,40 @@
+https://docs.ansible.com/ansible/latest/modules/modules_by_category.html
+
+ping https://docs.ansible.com/ansible/latest/modules/ping_module.html#ping-module
+shell https://docs.ansible.com/ansible/latest/modules/shell_module.html#shell-module
+debug https://docs.ansible.com/ansible/latest/modules/debug_module.html
+vmware_guest https://docs.ansible.com/ansible/latest/modules/vmware_guest_module.html#vmware-guest-module
+hostname https://docs.ansible.com/ansible/latest/modules/hostname_module.html#hostname-module
+
+stat https://docs.ansible.com/ansible/latest/modules/stat_module.html
+lineinfile https://docs.ansible.com/ansible/latest/modules/lineinfile_module.html#lineinfile-module
+replace https://docs.ansible.com/ansible/latest/modules/replace_module.html#replace-module
+blockinfile https://docs.ansible.com/ansible/latest/modules/blockinfile_module.html#blockinfile-module
+authorized_key https://docs.ansible.com/ansible/latest/modules/authorized_key_module.html
+
+cron https://docs.ansible.com/ansible/latest/modules/cron_module.html#cron-module
+gather_facts https://docs.ansible.com/ansible/latest/modules/gather_facts_module.html#gather-facts-module
+mount https://docs.ansible.com/ansible/latest/modules/mount_module.html#mount-module
+reboot https://docs.ansible.com/ansible/latest/modules/reboot_module.html#reboot-module
+service https://docs.ansible.com/ansible/latest/modules/service_module.html#service-module
+timezone https://docs.ansible.com/ansible/latest/modules/timezone_module.html#timezone-module
+user https://docs.ansible.com/ansible/latest/modules/user_module.html#user-module
+command https://docs.ansible.com/ansible/latest/modules/command_module.html#command-module
+Files modules - https://docs.ansible.com/ansible/latest/modules/list_of_files_modules.html
+Database modules - https://docs.ansible.com/ansible/latest/modules/list_of_database_modules.html
+Zabbix https://docs.ansible.com/ansible/latest/modules/list_of_monitoring_modules.html
+syslogger https://docs.ansible.com/ansible/latest/modules/syslogger_module.html#syslogger-module
+mail https://docs.ansible.com/ansible/latest/modules/mail_module.html#mail-module
+telegram https://docs.ansible.com/ansible/latest/modules/telegram_module.html#telegram-module
+Packaging modules - https://docs.ansible.com/ansible/latest/modules/list_of_packaging_modules.html
+pause https://docs.ansible.com/ansible/latest/modules/pause_module.html#pause-module
+gunicorn https://docs.ansible.com/ansible/latest/modules/gunicorn_module.html#gunicorn-module
+pip https://docs.ansible.com/ansible/latest/modules/pip_module.html#pip-module
+apt https://docs.ansible.com/ansible/latest/modules/apt_module.html#apt-module
+wait_for https://docs.ansible.com/ansible/latest/modules/wait_for_module.html#wait-for-module
+wait_for_connection https://docs.ansible.com/ansible/latest/modules/wait_for_connection_module.html#wait-for-connection-module
+wakeonlan https://docs.ansible.com/ansible/latest/modules/wakeonlan_module.html
+haproxy https://docs.ansible.com/ansible/latest/modules/haproxy_module.html
+ufw https://docs.ansible.com/ansible/latest/modules/ufw_module.html
+docker_image https://docs.ansible.com/ansible/latest/modules/docker_image_module.html
+docker_container https://docs.ansible.com/ansible/latest/modules/docker_container_module.html
