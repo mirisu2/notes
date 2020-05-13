@@ -40,9 +40,9 @@ sudo apt-get install jenkins
 export JENKINS_USER_ID=john
 export JENKINS_API_TOKEN=q43v346vh3j3e55h6yu
 ```
-http://ip-addr:8080/pipeline-syntax/
-http://ip-addr:8080/env-vars.html/
-https://e.printstacktrace.blog/jenkins-pipeline-environment-variables-the-definitive-guide/
+> http://ip-addr:8080/pipeline-syntax/
+> http://ip-addr:8080/env-vars.html/
+> https://e.printstacktrace.blog/jenkins-pipeline-environment-variables-the-definitive-guide/
 ```
 java -jar jenkins-cli.jar -s http://localhost:8080/ safe-restart
 ```
@@ -51,14 +51,14 @@ java -jar jenkins-cli.jar -s http://localhost:8080/ safe-restart
 pipeline {
 	agent {}
 	*environment {
-		        TELEGRAM_ID      = credentials('TELEGRAM_ID')
-        		X_NOTIFY_API_Key = credentials('X_NOTIFY_API_Key')
+		TELEGRAM_ID      = credentials('TELEGRAM_ID')
+        	X_NOTIFY_API_Key = credentials('X_NOTIFY_API_Key')
 	}
 	*tools {}
 	*options {
 		{
-			disableConcurrentBuilds()
-			buildDiscarder(logRotator(numToKeepStr: ''))
+		disableConcurrentBuilds()
+		buildDiscarder(logRotator(numToKeepStr: ''))
 		}
 	}
 	*triggers {}
