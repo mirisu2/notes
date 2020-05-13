@@ -120,3 +120,8 @@ $ docker run -i -t -v ~/docker_ubuntu:/host_directory ubuntu:16.04 /bin/bash
 ```$ docker volume prune```
 ## Networking
 [url](https://docs.docker.com/network/)
+>If you don’t specify the --driver option, the command automatically creates a bridge network for you. 
+>When you install Docker Engine it creates a bridge network automatically. 
+>This network corresponds to the docker0 bridge that Engine has traditionally relied on. 
+>When you launch a new container with docker run it automatically connects to this bridge network. 
+>You cannot remove this default bridge network, but you can create new ones using the network create command.
