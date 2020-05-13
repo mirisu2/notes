@@ -1,0 +1,433 @@
+https://github.com/geerlingguy/ansible-for-devops
+
+# The defaults are:
+remote_user – same as local user
+become_user – root
+become – False
+become_method – sudo
+
+# check the syntax
+ansible-playbook --syntax-check myplaybook.yml
+
+# test a playbook without actually making any changes to the target hosts
+ansible-playbook --check myplaybook.yml
+
+# Stepping through a playbook may also be useful
+ansible-playbook --step myplaybook.yml
+
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---
+- hosts: web1
+  tasks:
+  - name: print IP address
+    debug:
+      msg: "
+      {% for host in groups['all'] %} 
+        {{ hostvars[host]['ansible_host'] }} 
+      {% endfor %}
+      "
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- hosts: example
+  tasks:
+    - name: Update SSH configuration to be more secure.
+      lineinfile:
+        dest: /etc/ssh/sshd_config
+        regexp: "{{ item.regexp }}"
+        line: "{{ item.line }}"
+        state: present
+      with_items:
+        - regexp: "^PasswordAuthentication"
+            line: "PasswordAuthentication no"
+        - regexp: "^PermitRootLogin"
+            line: "PermitRootLogin no"
+        - regexp: "^Port"
+            line: "Port 2849"
+      notify: restart ssh
+
+  handlers:
+    - name: restart ssh
+      service: name=ssh state=restarted
+			become: yes
+			
+- name: Add sudo group rights for deployment user.
+  lineinfile:
+    dest: /etc/sudoers
+    regexp: '^%johndoe'
+    line: 'johndoe ALL=(ALL) NOPASSWD: ALL'
+    state: present
+		
+- name: Remove unused packages.
+  apt: name={{ item }} state=absent purge=yes
+  with_items:
+    - apache2
+    - nano
+    - mailutils
+
+- name: Is Bind Installed?
+  apt: name={{ item }} state=installed
+  with_items:
+   - bind9
+   - bind9-doc
+   - dnsutils
+
+---
+- name: Install Pip.
+  apt: name=python-pip state=present
+  become: yes
+
+- name: Install Docker Python library.
+  pip: name=docker state=present
+  become: yes
+  
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---
+- hosts: all
+  ignore_errors: true
+  
+  tasks:
+    - name: hello printer
+      shell: echo "hello world" >> /etc/hello
+      creates: /etc/hello
+      
+    - name: Ensure NTP (for time synchronization) is installed.
+      yum: name=ntp state=present
+    - name: Ensure NTP is running.
+      service: name=ntpd state=started enabled=yes    
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tasks:
+
+  - action: uri url=http://www.example.com return_content=yes
+    register: webpage
+
+  - fail:
+      msg: 'service is not happy'
+    when: "'AWESOME' not in webpage.content"
+    
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- hosts: databases
+  remote_user: ubuntu
+  become: True
+  
+  tasks:
+  - name: ensure that postgresql is started
+    service:
+      name: postgresql
+      state: started
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- name: update the system
+  yum:
+   name: "*"
+   state: latest
+
+# The shell module puts the system to sleep for 5 seconds then reboots. We use sleep to prevent the connection from
+# breaking, async to avoid timeout, and poll to fire & forget. 
+- name: restart system to reboot to newest kernel
+  shell: "sleep 5 && reboot"
+  async: 1
+  poll: 0
+  
+# We pause for 10 seconds to wait for the VM to come back and use wait_for_connection to connect back to the VM
+# as soon as it can make a connection.
+- name: wait for 10 seconds
+  pause:
+   seconds: 10
+   
+- name: wait for the system to reboot
+  wait_for_connection:
+   connect_timeout: 20
+   sleep: 5
+   delay: 5
+   timeout: 60
+ 
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---
+- name: New playbook
+  hosts: all
+  
+  vars:
+    src_file: /home/bb/bb
+    dst_file: /home/aa/aa
+  
+  tasks:
+  
+  - block:
+    - name: ...
+      apt:
+    - name: ...
+      copy: src={{ src_file }} dst={{ dst_file }} mode=0755
+      notify: Restart some service1
+    - name: ...
+      service: 
+    when: ansible_os_family == "Debian"
+    
+  - block:
+    - name: ...
+      apt:
+    - name: ...
+      copy:
+      notify: Restart some service2
+    - name: ...
+      service: 
+    when: ansible_os_family == "RedHat"    
+    
+  handlers:
+  - name: Restart some service1
+    service: name=some_service1 state=restarted
+  - name: Restart some service2
+    service: name=some_service2 state=restarted    
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---
+- hosts: all
+  become: yes
+  
+  vars_files:
+    - vars.yaml
+    
+  pre_tasks:
+    - name: Update apt cache if needed.
+      apt: update_cache=yes cache_valid_time=3600
+      
+  handlers:
+    - name: restart apache
+      service: name=apache2 state=restarted
+      
+  tasks:
+  
+    - name: Get software for apt repository management.
+      apt:
+        state: present
+        name:
+          - python-apt
+          - python-pycurl
+          
+    - name: Add ondrej repository for later versions of PHP.
+      apt_repository: repo='ppa:ondrej/php' update_cache=yes
+          
+    - name: "Install Apache, MySQL, PHP, and other dependencies."
+      apt:
+        state: present
+        name:
+         - git
+         - curl
+         - unzip
+         - sendmail
+         - apache2
+         - php7.1-common
+         - php7.1-cli
+         - php7.1-dev
+         - php7.1-gd
+         - php7.1-curl
+         - php7.1-json
+         - php7.1-opcache
+         - php7.1-xml
+         - php7.1-mbstring
+         - php7.1-pdo
+         - php7.1-mysql
+         - php-apcu
+         - libpcre3-dev
+         - libapache2-mod-php7.1
+         - python-mysqldb
+         - mysql-server
+         
+    - name: Disable the firewall (since this is for local dev only).
+      service: name=ufw state=stopped
+      
+    - name: "Start Apache, MySQL, and PHP."
+      service: "name={{ item }} state=started enabled=yes"
+      with_items:
+        - apache2
+        - mysql
+        
+    - name: Enable Apache rewrite module (required for Drupal).
+      apache2_module: name=rewrite state=present
+      notify: restart apache
+      
+    - name: Add Apache virtualhost for Drupal 8 development.
+      template:
+        src: "templates/drupal.test.conf.j2"
+        dest: "/etc/apache2/sites-available/{{ domain }}.test.conf"
+        owner: root
+        group: root
+        mode: 0644
+      notify: restart apache
+      
+    - name: Symlink Drupal virtualhost to sites-enabled.
+      file:
+        src: "/etc/apache2/sites-available/{{ domain }}.test.conf"
+        dest: "/etc/apache2/sites-enabled/{{ domain }}.test.conf"
+        state: link
+      notify: restart apache
+      
+    - name: Remove default virtualhost file.
+      file:
+        path: "/etc/apache2/sites-enabled/000-default.conf"
+        state: absent
+      notify: restart apache
+      
+    - name: Adjust OpCache memory setting.
+      lineinfile:
+        dest: "/etc/php/7.1/apache2/conf.d/10-opcache.ini"
+        regexp: "^opcache.memory_consumption"
+        line: "opcache.memory_consumption = 96"
+        state: present
+      notify: restart apache
+
+    - name: Remove the MySQL test database.
+      mysql_db: db=test state=absent
+      
+    - name: Create a database for Drupal.
+      mysql_db: "db={{ domain }} state=present"
+
+    - name: Create a MySQL user for Drupal.
+      mysql_user:
+      name: "{{ domain }}"
+      password: "1234"
+      priv: "{{ domain }}.*:ALL"
+      host: localhost
+      state: present
+      
+      
+templates/drupal.test.conf.j2
+<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+    ServerName {{ domain }}.test
+    ServerAlias www.{{ domain }}.test
+    DocumentRoot {{ drupal_core_path }}
+    
+    <Directory "{{ drupal_core_path }}">
+        Options FollowSymLinks Indexes
+        AllowOverride All
+    </Directory>
+</VirtualHost>
+
+vars.yaml
+---
+# The core version you want to use (e.g. 8.5.x, 8.6.x).
+drupal_core_version: "8.5.x"
+
+# The path where Drupal will be downloaded and installed.
+drupal_core_path: "/var/www/drupal-{{ drupal_core_version }}-dev"
+
+# The resulting domain will be [domain].test (with .test appended).
+domain: "drupal"
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tasks:
+  - name: Install Java.
+    apt: name=openjdk-8-jdk state=present
+    
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- name: Expand Solr.
+  unarchive:
+    src: "{{ download_dir }}/solr-{{ solr_version }}.tgz"
+    dest: "{{ download_dir }}"
+    copy: no
+    creates: "{{ download_dir }}/solr-{{ solr_version }}/README.txt"
+    
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+handlers:
+  - name: restart apache
+    service: name=apache2 state=restarted
+    
+tasks:
+  - name: Enable Apache rewrite module.
+    apache2_module: name=rewrite state=present
+    notify: restart apache
+    
+  - name: Rebuild application configuration.
+    command: /opt/app/rebuild.sh
+    notify:
+      - restart apache
+      - restart memcached
+
+handlers:
+- name: restart apache
+  service: name=apache2 state=restarted
+  notify: restart memcached
+  
+- name: restart memcached
+  service: name=memcached state=restarted
+  
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  
+- name: Add an environment variable to the remote user's shell.
+  lineinfile: "dest=~/.bash_profile regexp=^ENV_VAR= \
+  line=ENV_VAR=value"
+
+- name: Get the value of the environment variable we just added.
+  shell: 'source ~/.bash_profile && echo $ENV_VAR'
+  register: foo
+
+- name: Print the value of the environment variable.
+  debug: msg="The variable is {{ foo.stdout }}"
+  
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  
+- name: Download a file, using example-proxy as a proxy.
+  get_url: url=http://www.example.com/file.tar.gz dest=~/Downloads/
+  environment:
+    http_proxy: http://example-proxy:80/
+    
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~   
+vars:
+  var_proxy:
+    http_proxy: http://example-proxy:80/
+    https_proxy: https://example-proxy:443/
+
+tasks:
+- name: Download a file, using example-proxy as a proxy.
+  get_url: url=http://www.example.com/file.tar.gz dest=~/Downloads/
+  environment: var_proxy
+  
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~   
+---
+- hosts: example
+  vars:
+    foo: bar
+  tasks:
+    # Prints "Variable 'foo' is set to bar".
+    - debug: msg="Variable 'foo' is set to {{ foo }}"
+    
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+---
+- hosts: example
+  vars_files:
+    - vars.yaml
+  tasks:
+    - debug: msg="Variable 'foo' is set to {{ foo }}"
+    
+# Variables file 'vars.yml' in the same folder as the playbook.
+3 foo: bar    
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+- hosts: example
+  vars_files:
+    - "apache_default.yml"
+    - "apache_{{ ansible_os_family }}.yml"
+  tasks:
+    - service: name={{ apache }} state=running
+    
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+---
+# File: /etc/ansible/group_vars/group
+admin_user: john
+
+---
+# File: /etc/ansible/host_vars/host1
+admin_user: jane
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+---
+- hosts: appserver
+
+  vars_files:
+    - vars/api_key.yml
+
+  tasks:
+    - name: Connect to service with our API key.
+      command: connect_to_service
+      environment:
+        SERVICE_API_KEY: "{{ myapp_service_api_key }}"
