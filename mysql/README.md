@@ -37,7 +37,7 @@ max_binlog_size   = 100M
 sync_binlog       = 1
 log_slave_updates = 1 #it allows us to convert slave server to master
 ```
-## STEP 2. create account on both servers
+### STEP 2. create account on both servers
 ```
 GRANT REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO repl@'192.168.198.%' IDENTIFIED BY 'myPas#d';
 ```
