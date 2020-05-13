@@ -1,0 +1,34 @@
+# Initial priority equal 100.
+
+global_defs {
+  notification_email {
+    gde1@to.tam
+    gde2@to.tam
+  }
+  notification_email_from keepalived@to.tam
+  smtp_server relay.to.tam
+  smtp_helo_name db2.to.tam
+  smtp_connect_timeout 30
+  vrrp_mcast_group4 224.0.0.18
+  vrrp_mcast_group6 ff02::12
+  default_interface ens161
+  vrrp_version 2
+}
+vrrp_instance VRRP_MySQL {
+	state BACKUP
+	interface ens225
+	unicast_src_ip 192.168.198.120
+	unicast_peer {
+		192.168.198.25
+	}
+	virtual_router_id 198
+	priority 100
+	authentication {
+		auth_type PASS
+		auth_pass AeT8to3y
+	}
+	virtual_ipaddress {
+		192.168.198.130/24 dev ens225 label ens225:VI
+	}	
+	smtp_alert yes
+}
