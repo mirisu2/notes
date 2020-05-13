@@ -138,3 +138,24 @@ your network, each with a unique MAC address.
 >access each other by IP addresses.
 >User-defined bridges provide better isolation.
 >Containers can be attached and detached from user-defined networks on the fly.
+## Create a user-defined bridge network
+```$ 
+docker network create my-net
+docker network create --driver=bridge --subnet=10.15.0.0/24 --gateway=10.15.0.1 app1-net
+```
+## Command to remove a user-defined bridge network
+>If containers are currently connected to the network, disconnect them first.
+```$ docker network rm my-net```
+## Connect a container to a user-defined bridge
+```$ docker run -itd --network=my-net busybox```
+## Specify the IP address a container will use on a given network
+```$ docker network connect --ip 10.10.36.122 multi-host-network container2```
+## To connect a running container to an existing user-defined bridge
+```$ docker network connect my-net my-nginx```
+## Disconnect a container from a user-defined bridge
+```$ docker network disconnect my-net my-nginx```
+## Inspect the bridge network to see what containers are connected to it
+```
+$ docker network inspect bridge
+docker network inspect app1-net
+```
