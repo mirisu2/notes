@@ -138,14 +138,17 @@ your network, each with a unique MAC address.
 >access each other by IP addresses.
 >User-defined bridges provide better isolation.
 >Containers can be attached and detached from user-defined networks on the fly.
+
 ## Create a user-defined bridge network
-```$ 
-docker network create my-net
-docker network create --driver=bridge --subnet=10.15.0.0/24 --gateway=10.15.0.1 app1-net
+```
+$ docker network create my-net
+$ docker network create --driver=bridge --subnet=10.15.0.0/24 --gateway=10.15.0.1 app1-net
 ```
 ## Command to remove a user-defined bridge network
->If containers are currently connected to the network, disconnect them first.
-```$ docker network rm my-net```
+> If containers are currently connected to the network, disconnect them first.
+```
+$ docker network rm my-net
+```
 ## Connect a container to a user-defined bridge
 ```$ docker run -itd --network=my-net busybox```
 ## Specify the IP address a container will use on a given network
@@ -157,5 +160,20 @@ docker network create --driver=bridge --subnet=10.15.0.0/24 --gateway=10.15.0.1 
 ## Inspect the bridge network to see what containers are connected to it
 ```
 $ docker network inspect bridge
-docker network inspect app1-net
+$ docker network inspect app1-net
+```
+## [IPv6](https://medium.com/@skleeschulte/how-to-enable-ipv6-for-docker-containers-on-ubuntu-18-04-c68394a219a2)
+```
+cat /etc/docker/daemon.json
+{
+  "ipv6": true,
+  "fixed-cidr-v6": "fd00::/80",
+  "userland-proxy": false
+}
+$ sudo ip6tables -t nat -A POSTROUTING -s fd00::/80 ! -o docker0 -j MASQUERADE
+OR
+$ docker run -d --restart=always -v /var/run/docker.sock:/var/run/docker.sock:ro --cap-drop=ALL \
+--cap-add=NET_RAW --cap-add=NET_ADMIN --cap-add=SYS_MODULE --net=host --name ipv6nat robbertkl/ipv6nat
+and test it
+$ docker run --rm -t busybox ping6 -c 4 google.com
 ```
