@@ -1,0 +1,59 @@
+# Install Compose on Linux systems
+https://docs.docker.com/compose/install/
+curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+
+# Command-line completion
+curl -L https://raw.githubusercontent.com/docker/compose/1.25.4/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
+
+# Compose command-line reference
+https://docs.docker.com/compose/reference/
+
+# Compose file version 3 reference
+https://docs.docker.com/compose/compose-file/
+
+
+https://docs.docker.com/compose/environment-variables/
+# When you set the same environment variable in multiple files, here’s the priority used by Compose to choose which value to use:
+-Compose file
+-Shell environment variables
+-Environment file
+-Dockerfile
+-Variable is not defined
+
+$ cat .env
+TAG=v1.5
+$ cat docker-compose.yml
+version: '3'
+services:
+  web:
+    image: "webapp:${TAG}"
+    
+
+$ export TAG=v2.0
+$ docker-compose config
+version: '3'
+services:
+  web:
+    image: 'webapp:v2.0'
+
+
+$ cat ./Docker/api/api.env
+NODE_ENV=test
+$ cat docker-compose.yml
+version: '3'
+services:
+  api:
+    image: 'node:6-alpine'
+    env_file:
+     - ./Docker/api/api.env
+    environment:
+     - NODE_ENV=production
+     
+     
+# Networking in Compose
+By default Compose sets up a single network for your app. Each container for a service joins the default network and is both 
+reachable by other containers on that network, and discoverable by them at a hostname identical to the container name.
+
+Your app’s network is given a name based on the “project name”, which is based on the name of the directory it lives in. 
+You can override the project name with either the --project-name flag or the COMPOSE_PROJECT_NAME environment variable.
