@@ -116,3 +116,7 @@ $ docker run -d --name devtest -v myvol2:/app nginx:latest
 $ docker run -d --name=nginxtest -v nginx-vol:/usr/share/nginx/html nginx:latest
 $ docker run -i -t -v ~/docker_ubuntu:/host_directory ubuntu:16.04 /bin/bash
 ```
+## To remove all unused volumes and free up space
+```$ docker volume prune```
+## Networking
+[url](https://docs.docker.com/network/)
