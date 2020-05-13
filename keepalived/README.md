@@ -22,4 +22,5 @@ $ sudo vim /etc/keepalived/keepalived.conf
 ```
 $ sudo tail -f /var/log/syslog | grep Keepalived
 $ sudo systemctl status keepalived
+$ ip addr show | grep VI
 ```
