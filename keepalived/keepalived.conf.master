@@ -1,0 +1,43 @@
+# Initial priority equal 99. If chk_mysql.py returns 0, it adds +4 to priority
+# and this server becomes MASTER
+global_defs {
+  notification_email {
+    gde1@to.tam
+    gde2@to.tam
+  }
+  notification_email_from keepalived@to.tam
+  smtp_server relay.to.tam
+  smtp_helo_name db2.to.tam
+  smtp_connect_timeout 30
+  vrrp_mcast_group4 224.0.0.18
+  vrrp_mcast_group6 ff02::12
+  default_interface ens161
+  vrrp_version 2
+  script_user root root
+}
+vrrp_script chk_mysql {
+  script "/usr/bin/python3 /etc/keepalived/chk_mysql.py"
+  weight 4
+  interval 2
+}
+vrrp_instance VRRP_MySQL {
+  state MASTER
+  interface ens161
+  unicast_src_ip 192.168.198.25
+  unicast_peer {
+    192.168.198.120
+  }
+  virtual_router_id 198
+  priority 99
+  authentication {
+    auth_type PASS
+    auth_pass superPass
+  }
+  virtual_ipaddress {
+    192.168.198.130/24 dev ens161 label ens161:VI
+  }
+  track_script {
+    chk_mysql
+  }
+  smtp_alert yes
+}
