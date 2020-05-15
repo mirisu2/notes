@@ -66,3 +66,20 @@ SHOW PROCESSLIST\G
 SHOW МASTER STATUS;
 SHOW SLAVE STATUS\G
 ```
+### Troubleshooting
+##### One problem I had on slave
+```
+MariaDB [(none)]> SHOW SLAVE STATUS\G
+                Slave_IO_State: Waiting for master to send event
+              Slave_IO_Running: **Yes**
+             Slave_SQL_Running: **No**
+                    Last_Errno: 1396
+                    Last_Error: Error 'Operation DROP USER failed for ...
+                  Skip_Counter: 0
+           Exec_Master_Log_Pos: 92320728
+               Relay_Log_Space: 5509915
+                 Last_IO_Error:
+                Last_SQL_Errno: 1396
+                Last_SQL_Error: Error 'Operation DROP USER failed for ...
+```
+STOP SLAVE;SET GLOBAL SQL_SLAVE_SKIP_COUNTER = 1;START SLAVE;
