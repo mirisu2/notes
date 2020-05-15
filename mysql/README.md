@@ -71,8 +71,8 @@ SHOW SLAVE STATUS\G
 ```
 MariaDB [(none)]> SHOW SLAVE STATUS\G
                 Slave_IO_State: Waiting for master to send event
-              Slave_IO_Running: **Yes**
-             Slave_SQL_Running: **No**
+              Slave_IO_Running: Yes
+             Slave_SQL_Running: No
                     Last_Errno: 1396
                     Last_Error: Error 'Operation DROP USER failed for ...
                   Skip_Counter: 0
@@ -82,4 +82,9 @@ MariaDB [(none)]> SHOW SLAVE STATUS\G
                 Last_SQL_Errno: 1396
                 Last_SQL_Error: Error 'Operation DROP USER failed for ...
 ```
-STOP SLAVE;SET GLOBAL SQL_SLAVE_SKIP_COUNTER = 1;START SLAVE;
+##### One of solution
+```
+STOP SLAVE;
+SET GLOBAL SQL_SLAVE_SKIP_COUNTER = 1;
+START SLAVE;
+```
