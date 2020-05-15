@@ -15,3 +15,8 @@ Zabbix-agent, в свою очередь, выдал:
 > Установка: поставить новую версию, и заменить файлы из архива. 
 > Ещё попросил скопировать файл из /etc/zabbix/zabbix_agentd.conf в /usr/local/etc/zabbix_agentd.conf.
 > Рестарт сервиса
+```
+root@db2:~# zabbix_agentd -V
+zabbix_agentd (daemon) (Zabbix) 3.0.31
+```
+#
