@@ -140,3 +140,5 @@ There are another 3 special keywords for tags: `tagged`, `untagged` and `all`, w
 * **files** - contains files which can be deployed via this role.
 * **templates** - contains templates which can be deployed via this role.
 * **meta** - defines some meta data for this role. See below for more details.
+
+## [inventory parameters](https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html#connecting-to-hosts-behavioral-inventory-parameters)
