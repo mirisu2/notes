@@ -17,6 +17,30 @@ ansible-playbook --step myplaybook.yml
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- hosts: all
+  remote_user: root
+
+  tasks:
+
+    - name: Install cobbler
+      package:
+        name: cobbler
+        state: present
+      environment:
+        http_proxy: http://proxy.example.com:8080
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- hosts: all
+  no_log: True
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  - name: secret task
+  shell: /usr/bin/do_something --value={{ secret_value }}
+  no_log: True
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---
+# ...
+  vars:
+     local_home: "{{ lookup('env','HOME') }}"
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ---
 - hosts: web1
   tasks:
