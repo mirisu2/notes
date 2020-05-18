@@ -4,7 +4,7 @@ We have various solutions:
 * [MariaDB MaxScale](https://mariadb.com/kb/en/mariadb-maxscale-24-mariadb-maxscale-installation-guide/)
 * [MySQL Router](https://dev.mysql.com/doc/mysql-router/8.0/en/mysql-router-general.html)
 * [HAProxy](http://www.haproxy.org/)
-* [ProxySQL](https://proxysql.com/)
+* [ProxySQL](https://github.com/sysown/proxysql/)
 * pacemaker/corosync
 * [keepalived](https://www.keepalived.org/)
 
