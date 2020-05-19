@@ -238,3 +238,7 @@ docker build -t mydomain.host/notify:v0.0.1 .
 docker push mydomain.host/notify:v0.0.1
 curl https://mydomain.host/v2/_catalog
 ```
+## Retaining your container’s bash history
+```
+docker run -e HIST_FILE=/root/.bash_history -v=$HOME/.bash_history:/root/.bash_history -ti ubuntu /bin/bash
+```
