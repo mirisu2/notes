@@ -242,3 +242,12 @@ curl https://mydomain.host/v2/_catalog
 ```
 docker run -e HIST_FILE=/root/.bash_history -v=$HOME/.bash_history:/root/.bash_history -ti ubuntu /bin/bash
 ```
+## Remote volume mounting using SSHFS
+```
+docker run -t -i --privileged debian /bin/bash
+# when it’s started up, run from within the container to install SSHFS.
+apt-get update && apt-get install sshfs
+$ LOCALPATH=/path/to/local/directory
+$ mkdir $LOCALPATH
+$ sshfs user@host:/path/to/remote/directory $LOCALPATH
+```
