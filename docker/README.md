@@ -251,7 +251,7 @@ $ LOCALPATH=/path/to/local/directory
 $ mkdir $LOCALPATH
 $ sshfs user@host:/path/to/remote/directory $LOCALPATH
 ```
-## Using (Portainer)[https://portainer.readthedocs.io/en/latest/deployment.html] to manage your Docker daemon
+## Using [Portainer](https://portainer.readthedocs.io/en/latest/deployment.html) to manage your Docker daemon
 ```
 docker run -d -p 9000:9000 -p 8000:8000 --name portainer --restart always -v portainer_data:/data portainer/portainer \
 -H tcp://192.168.198.115:2375
