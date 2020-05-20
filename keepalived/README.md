@@ -7,6 +7,7 @@ We have various solutions:
 * [ProxySQL](https://github.com/sysown/proxysql/)
 * pacemaker/corosync
 * [keepalived](https://www.keepalived.org/)
+* [Galera Cluster](https://galeracluster.com/resources/)
 
 And this time I tried **keepalived** service.
 I configured two mysql servers. Both servers are master. I know this is a complicated solution. But I decided to use them as active/passive. It allows me to use them safely.
