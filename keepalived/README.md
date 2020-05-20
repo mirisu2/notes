@@ -6,7 +6,7 @@ We have various solutions:
 * [HAProxy](http://www.haproxy.org/)
 * [ProxySQL](https://github.com/sysown/proxysql/)
 * pacemaker/corosync
-* [keepalived](https://www.keepalived.org/)
+* [keepalived](https://www.keepalived.org/) (ucarp)
 * [Galera Cluster](https://galeracluster.com/resources/)
 
 And this time I tried **keepalived** service.
