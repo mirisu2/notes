@@ -219,22 +219,30 @@ https://gadelkareem.com/2018/10/23/deploy-a-docker-registry-with-letsencrypt-cer
 ```
 sudo apt-get install certbot
 sudo certbot certonly --standalone --preferred-challenges http --non-interactive --staple-ocsp --agree-tos \
--m gde@to.tam -d mydomain.host
+-m gde@to.tam -d dockerhub.mydomain.host
 
-cd /etc/letsencrypt/live/mydomain.host
+cd /etc/letsencrypt/live/dockerhub.mydomain.host
 cp privkey.pem domain.key
 cat cert.pem chain.pem > domain.crt
 chmod 777 domain.*
 
-$ mkdir /home/john/docker-registry
+$ mkdir auth
+$ docker run --entrypoint htpasswd registry:2 -Bbn admin passw4rd > auth/htpasswd
+  
+$ mkdir /var/lib/registry
 
 $ docker run -d -p 443:5000 --restart=always --name registry \
-  -v /etc/letsencrypt/live/mydomain.host:/certs \
-  -v /mnt/docker-registry:/var/lib/registry \
+  -v /home/arty/auth:/auth -e "REGISTRY_AUTH=htpasswd" \
+  -e "REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm" \
+  -e REGISTRY_AUTH_HTPASSWD_PATH=/auth/htpasswd \
+  -v /etc/letsencrypt/live/dockerhub.mydomain.host:/certs \
+  -v /var/lib/registry:/var/lib/registry \
   -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt \
   -e REGISTRY_HTTP_TLS_KEY=/certs/domain.key \
-  registry:latest
-	
+  registry:2
+
+docker login dockerhub.mydomain.host
+
 docker build -t mydomain.host/notify:v0.0.1 .
 docker push mydomain.host/notify:v0.0.1
 curl https://mydomain.host/v2/_catalog
