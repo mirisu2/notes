@@ -217,6 +217,7 @@ $ docker -H 127.0.0.1:2375 run -d --rm -p 8085:80 --name my-php56-app localhost:
 ```
 https://gadelkareem.com/2018/10/23/deploy-a-docker-registry-with-letsencrypt-certificates-on-ubuntu-18-04/
 ```
+sudo apt-get install certbot
 sudo certbot certonly --standalone --preferred-challenges http --non-interactive --staple-ocsp --agree-tos \
 -m gde@to.tam -d mydomain.host
 
