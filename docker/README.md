@@ -202,6 +202,11 @@ https://docs.docker.com/config/containers/logging/local/
 
 ## Private Docker registry
 ```
+curl https://dockerhub.mydomain.local/v2/_catalog
+{"repositories":["blabla","php5.6-apache"]}
+curl https://dockerhub.mydomain.local/v2/blabla
+{"name":"blabla","tags":["v0.0.59","v0.11","v0.0.62","v0.0.64","latest","v0.0.63"]}
+
 $ docker -H 127.0.0.1:2375 run -d -p 5000:5000 --restart=always -v /home/john:/var/lib/registry --name registry registry:2
 $ docker -H 127.0.0.1:2375 tag my-php-apache-app:v5.6 localhost:5000/my-php-apache-app:v5.6
 $ docker -H 127.0.0.1:2375 push localhost:5000/my-php-apache-app:v5.6
