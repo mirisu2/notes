@@ -1,5 +1,5 @@
 # Elasticsearch
-## Установка [elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/7.7/deb.html#deb-repo)
+### Установка [elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/7.7/deb.html#deb-repo)
 ```
 wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
 sudo apt-get install apt-transport-https
@@ -33,16 +33,16 @@ curl -X GET http://localhost:9200
   "tagline" : "You Know, for Search"
 }
 ```
-## файл конфигурации [settings](https://www.elastic.co/guide/en/elasticsearch/reference/7.7/settings.html)
+### файл конфигурации [settings](https://www.elastic.co/guide/en/elasticsearch/reference/7.7/settings.html)
 ```
 /etc/elasticsearch/elasticsearch.yml
 ```
-## параметры
+### параметры
 ```
 node.name
 cluster.name
 ```
-## права на папку
+### права на папку
 ```
 root:elasticsearch
 ```
@@ -53,7 +53,7 @@ root:elasticsearch
 > * _type 
 > * _index
 
-## Шарды
+### Шарды
 > Шарды помогают распределить индекс по кластеру. Процесс разделения данных по шардам называется шардированием.
 
 > По умолчанию каждый индекс настроен так, чтобы иметь пять шардов в Elasticsearch. В момент создания индекса можно
@@ -64,7 +64,7 @@ root:elasticsearch
 > Реплики шардов — это дополнительные копии оригинального или первичного шарда для обеспечения высокого уровня доступности данных.
 
 # Kibana
-## Установка [kibana](https://www.elastic.co/downloads/kibana)
+### Установка [kibana](https://www.elastic.co/downloads/kibana)
 ```
 wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
 sudo apt-get install apt-transport-https
@@ -81,11 +81,11 @@ sudo systemctl start kibana.service
 ```
 curl -X GET http://localhost:5601
 ```
-## файл конфигурации [settings](https://www.elastic.co/guide/en/kibana/7.7/settings.html)
+### файл конфигурации [settings](https://www.elastic.co/guide/en/kibana/7.7/settings.html)
 ```
 /etc/kibana/kibana.yml
 ```
-## параметры
+### параметры
 ```
 server.host: "localhost"
 server.host: "0.0.0.0"
