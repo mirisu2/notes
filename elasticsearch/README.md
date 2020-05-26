@@ -45,6 +45,13 @@ node.name
 ```
 root:elasticsearch
 ```
+> index -> type -> document
+
+> document -> метаполя:
+*_id
+*_type 
+*_index
+
 # Kibana
 ## Установка [kibana](https://www.elastic.co/downloads/kibana)
 ```
