@@ -53,6 +53,32 @@ root:elasticsearch
 > * _type 
 > * _index
 
+> Индексы могут создаваться на "лету" при вставке, либо определены заранее через index template
+```
+PUT /o_systems/_doc/1
+{
+    "family": "debian",
+    "codename": "stretch",
+    "version": 9
+}
+GET /o_systems/_doc/1
+{
+  "_index" : "o_systems",
+  "_type" : "_doc",
+  "_id" : "1",
+  "_version" : 5,
+  "_seq_no" : 7,
+  "_primary_term" : 1,
+  "found" : true,
+  "_source" : {
+    "family" : "debian",
+    "codename" : "stretch",
+    "version" : 9
+  }
+}
+GET /o_systems/_search/
+```
+
 ### Шарды
 > Шарды помогают распределить индекс по кластеру. Процесс разделения данных по шардам называется шардированием.
 
