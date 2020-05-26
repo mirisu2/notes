@@ -150,7 +150,9 @@ PUT /friends/_mapping
   }
 }
 ```
-
+> Except for supported mapping parameters, you can’t change the mapping or field type of an existing field. Changing an existing field 
+> could invalidate data that’s already indexed.
+> If you need to change the mapping of a field, create a new index with the correct mapping and reindex your data into that index.
 
 
 
