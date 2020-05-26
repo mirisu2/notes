@@ -104,15 +104,6 @@ GET /<index>/<type>/<id>
 ```
 #### Update API
 ```
-POST /o_systems/_doc/1
-{
-  "family": "ubuntu",
-  "codename": "Focal Fossa",
-  "version": 20.04  
-}
-```
-#### Update API
-```
 POST /o_systems/_update/1 
 { "doc":
   {
