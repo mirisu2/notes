@@ -118,8 +118,38 @@ DELETE /o_systems/_doc/1
 ```
 #### Creating indexes and taking control of mapping
 * Creating an index
-* Creating a mapping
+```
+PUT /friends
+{
+  "settings": {
+    "index": {
+      "number_of_shards": 5,
+      "number_of_replicas": 2
+    }
+  },
+  "mappings": {
+    "properties": {
+      "first_name": {
+        "type": "text"
+      },
+      "last_name": {
+        "type": "keyword"
+      }
+    }
+  }
+}
+```
 * Updating a mapping
+```
+PUT /friends/_mapping
+{
+  "properties": {
+    "age": {
+      "type": "long"
+    }
+  }
+}
+```
 
 
 
