@@ -116,6 +116,13 @@ POST /o_systems/_update/1
 ```
 DELETE /o_systems/_doc/1
 ```
+#### Creating indexes and taking control of mapping
+* Creating an index
+* Creating a mapping
+* Updating a mapping
+
+
+
 
 # Kibana
 ### Установка [kibana](https://www.elastic.co/downloads/kibana)
