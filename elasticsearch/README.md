@@ -190,6 +190,7 @@ DELETE /o_systems/_doc/1
 ```
 PUT /friends
 {
+  "index_patterns": ["friends*"],
   "settings": {
     "index": {
       "number_of_shards": 5,
