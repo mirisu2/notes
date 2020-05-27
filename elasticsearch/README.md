@@ -38,9 +38,12 @@ curl -X GET http://localhost:9200
 /etc/elasticsearch/elasticsearch.yml
 ```
 ### параметры
+> the introduction of a feature called **ingest node** in Elasticsearch 5.x onward provided a lightweight solution for preprocessing 
+> and enriching documents within Elasticsearch itself before they are indexed.
 ```
 node.name
 cluster.name
+node.ingest: false
 ```
 ### права на папку
 ```
