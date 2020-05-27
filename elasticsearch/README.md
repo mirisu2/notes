@@ -265,3 +265,7 @@ echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee 
 sudo apt-get update && sudo apt-get install logstash
 sudo systemctl start logstash.service
 ```
+#### config file
+```
+/etc/logstash/logstash.yml
+```
