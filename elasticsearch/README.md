@@ -95,20 +95,60 @@ GET /o_systems/_mapping
 ```
 curl -X PUT http://localhost:9200/_ingest/pipeline/my_pipeline -H 'content-type: application/json' 
 -d '{
-  "description" : "uppercase the incoming value in the message field", 
-  "processors" : [
-      {
-        "uppercase" : { "field": "message" }
-      }
-   ]
-  }'
+      "description" : "uppercase the incoming value in the message field", 
+      "processors" : [
+          {
+            "uppercase" : { "field": "message" }
+          }
+       ]
+    }'
 ```
 > When creating a pipeline, multiple processors can be defined, and the order of the execution depends on the order in which it is 
 > defined in the definition.
 * Get pipeline API
+to find the definition of all the pipelines is as follows:
+```
+curl -X GET http://localhost:9200/_ingest/pipeline -H 'content-type: application/json'
+```
+To find the definition of an existing pipeline, pass the pipeline ID to the pipeline API:
+```
+curl -X GET http://localhost:9200/_ingest/pipeline/my_pipeline  -H 'content-type: application/json'
+```
 * Delete pipeline API
+The delete pipeline API deletes pipelines by ID or wildcard match:
+```
+curl -X DELETE http://localhost:9200/_ingest/pipeline/my_pipeline  -H 'content-type: application/json'
+```
 * Simulate pipeline API
-
+This pipeline can be used to simulate the execution of a pipeline against the set of documents provided in the body of the request.
+```
+curl -X POST  http://localhost:9200/_ingest/pipeline/firstpipeline/_simulate -H 'content-type: application/json' 
+-d '{
+  "docs" : [
+    { "_source": {"message":"first document"} },
+    { "_source": {"message":"second document"} }
+    
+  ]
+}'
+```
+or
+```
+curl -X POST http://localhost:9200/_ingest/pipeline/_simulate -H 'content-type: application/json' 
+-d '{
+  "pipeline" : {
+    "processors":[
+      {
+         "join": {
+          "field": "message",
+          "separator": "-"
+        }
+      }]
+  },
+  "docs" : [
+    { "_source": {"message":["first","document"]} }  
+  ]
+}'
+```
 ### Шарды
 > Шарды помогают распределить индекс по кластеру. Процесс разделения данных по шардам называется шардированием.
 
