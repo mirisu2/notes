@@ -82,6 +82,32 @@ GET /o_systems/_doc/1
 GET /o_systems/_search/
 GET /o_systems/_mapping
 ```
+> A *pipeline* defines a series of processors. *Each* processor transforms the document in some way. *Each* processor is executed in
+> the order in which it is defined in the pipeline. A pipeline *consists of two main fields*: a description and a list of processors.
+```
+{
+  "description" : "...",
+  "processors" : [ ... ]
+}
+```
+#### Ingest APIs *_ingest*
+* Put pipeline API *(define a new pipeline)*
+```
+curl -X PUT http://localhost:9200/_ingest/pipeline/my_pipeline -H 'content-type: application/json' 
+-d '{
+  "description" : "uppercase the incoming value in the message field", 
+  "processors" : [
+      {
+        "uppercase" : { "field": "message" }
+      }
+   ]
+  }'
+```
+> When creating a pipeline, multiple processors can be defined, and the order of the execution depends on the order in which it is 
+> defined in the definition.
+* Get pipeline API
+* Delete pipeline API
+* Simulate pipeline API
 
 ### Шарды
 > Шарды помогают распределить индекс по кластеру. Процесс разделения данных по шардам называется шардированием.
