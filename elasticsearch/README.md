@@ -188,7 +188,7 @@ DELETE /o_systems/_doc/1
 #### Creating indexes and taking control of mapping
 * Creating an index
 ```
-PUT /friends
+PUT _template/friends_template
 {
   "index_patterns": ["friends*"],
   "settings": {
