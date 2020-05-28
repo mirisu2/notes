@@ -36,7 +36,7 @@ bin/logstash-plugin list --verbose
 bin/logstash-plugin list '*namefragment*' 
 bin/logstash-plugin list --group (input|filter|output) 
 ```
-
+#### /etc/logstash/conf.d/
 * 10-syslog-input.conf
 ```
 input {
