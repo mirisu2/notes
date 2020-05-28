@@ -255,8 +255,9 @@ curl -X GET http://localhost:5601
 ```
 ### параметры
 ```
-server.host: "localhost"
+server.port: 5601
 server.host: "0.0.0.0"
+server.name: ${HOSTNAME}
 elasticsearch.hosts: ["http://192.168.198.99:9200"]
 ```
 
@@ -274,4 +275,11 @@ sudo systemctl start logstash.service
 #### config file
 ```
 /etc/logstash/logstash.yml
+```
+#### параметры
+```
+node.name: ls-node-1
+path.data: /var/lib/logstash
+http.host: "127.0.0.1"
+path.logs: /var/log/logstash
 ```
