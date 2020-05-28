@@ -24,6 +24,5 @@ curl -X GET http://localhost:5601
 ```
 server.port: 5601
 server.host: "0.0.0.0"
-server.name: ${HOSTNAME}
 elasticsearch.hosts: ["http://192.168.198.99:9200"]
 ```
