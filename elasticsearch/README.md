@@ -33,7 +33,7 @@ curl -X GET http://localhost:9200
   "tagline" : "You Know, for Search"
 }
 ```
-### файл конфигурации [settings](https://www.elastic.co/guide/en/elasticsearch/reference/7.7/settings.html)
+### файл конфигурации [settings](https://www.elastic.co/guide/en/elasticsearch/reference/current/settings.html)
 ```
 /etc/elasticsearch/elasticsearch.yml
 ```
@@ -41,8 +41,13 @@ curl -X GET http://localhost:9200
 > the introduction of a feature called **ingest node** in Elasticsearch 5.x onward provided a lightweight solution for preprocessing 
 > and enriching documents within Elasticsearch itself before they are indexed.
 ```
-node.name
-cluster.name
+cluster.name: es-cluster-1
+node.name: es-node-1 or ${HOSTNAME}
+network.host: 192.168.198.99
+http.port: 9200
+path.data: /var/lib/elasticsearch
+path.log: /var/log/elasticsearch
+discovery.seed_hosts: ["192.168.198.99"]
 node.ingest: false
 ```
 ### права на папку
@@ -252,6 +257,7 @@ curl -X GET http://localhost:5601
 ```
 server.host: "localhost"
 server.host: "0.0.0.0"
+elasticsearch.hosts: ["http://192.168.198.99:9200"]
 ```
 
 # Logstash
