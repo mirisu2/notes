@@ -36,3 +36,48 @@ bin/logstash-plugin list --verbose
 bin/logstash-plugin list '*namefragment*' 
 bin/logstash-plugin list --group (input|filter|output) 
 ```
+
+* 10-syslog-input.conf
+```
+input {
+    syslog {
+        host => "0.0.0.0"
+        port => 5514
+        locale => "en_US"
+        syslog_field => "message"
+        timezone => "Europe/Moscow"
+        use_labels => true
+        type => "syslog"
+    }
+}
+```
+* 50-filter.conf
+```
+filter {
+
+    if [type] == "syslog" {
+        if [program] == "sshd" {
+            mutate {
+                add_field => { "[@metadata][source]" => "sshd" }
+            }
+            grok {
+                match => { "message" => "Accepted %{WORD:method} for %{WORD:UserName} from %{IP:FromHost}" }
+            }
+        }
+    }
+
+}
+```
+* 99-output.conf
+```
+output {
+
+    if [@metadata][source] == "sshd" {
+        elasticsearch {
+            hosts => ["http://192.168.198.99:9200"]
+            index => "syslog_sshd_%{+YYYY.MM.dd}"
+        }
+    }
+
+}
+```
