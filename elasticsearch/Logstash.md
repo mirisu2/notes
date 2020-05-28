@@ -20,7 +20,7 @@ path.data: /var/lib/logstash
 http.host: "127.0.0.1"
 path.logs: /var/log/logstash
 ```
-#### Check installed plugins
+#### Working with [plugins](https://www.elastic.co/guide/en/logstash/current/working-with-plugins.html)
 ```
 # /bin/logstash-plugin list
 bash: /bin/logstash-plugin: No such file or directory
