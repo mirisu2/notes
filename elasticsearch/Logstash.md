@@ -73,13 +73,16 @@ filter {
 output {
 
     if [@metadata][source] == "sshd" {
-        elasticsearch {
-            hosts => ["http://192.168.198.99:9200"]
-            index => "syslog_sshd_%{+YYYY.MM.dd}"
+        if !("_grokparsefailure" in [tags]) {
+            elasticsearch {
+                hosts => ["http://192.168.198.101:9200"]
+                index => "syslog_sshd_%{+YYYY.MM.dd}"
+            }
         }
     }
 
 }
+
 ```
 > Теперь на нужном сервере в /etc/rsyslog.conf
 ```
