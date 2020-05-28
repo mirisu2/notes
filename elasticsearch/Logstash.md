@@ -20,3 +20,19 @@ path.data: /var/lib/logstash
 http.host: "127.0.0.1"
 path.logs: /var/log/logstash
 ```
+#### Check installed plugins
+```
+# /bin/logstash-plugin list
+bash: /bin/logstash-plugin: No such file or directory
+# cd /usr/share/logstash
+root@elastic:/usr/share/logstash# bin/logstash-plugin list
+logstash-codec-avro
+logstash-codec-cef
+logstash-codec-collectd
+...
+
+bin/logstash-plugin list 
+bin/logstash-plugin list --verbose 
+bin/logstash-plugin list '*namefragment*' 
+bin/logstash-plugin list --group (input|filter|output) 
+```
