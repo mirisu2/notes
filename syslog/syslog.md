@@ -56,3 +56,7 @@ if $fromhost-ip=='192.168.1.1' then action(type="ommysql" server="localhost" db=
 if $fromhost-ip startswith '172.16.15.' then action(type="ommysql" server="localhost" db="Syslog" uid="rsyslog" pwd="pass4wd")
 & stop
 ```
+#### logger
+```
+man logger
+```
