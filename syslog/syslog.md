@@ -1,4 +1,4 @@
-## (RSYSLOG)[https://www.rsyslog.com/doc/v8-stable/configuration/]
+### [RSYSLOG](https://www.rsyslog.com/doc/v8-stable/configuration/)
 ```
 vim /etc/rsyslog.conf
 
