@@ -1,4 +1,9 @@
 ### [RSYSLOG](https://www.rsyslog.com/doc/v8-stable/configuration/)
+
+```
+rsyslogd -v
+rsyslogd -N1
+```
 vim /etc/rsyslog.conf
 ```
 #################
