@@ -35,4 +35,13 @@ POST /filebeat-7.7.0-2020.05.30-000001/_delete_by_query
     "match_all": {}
   }
 }
+{
+  "query": """
+  SELECT source.ip, ROUND(SUM(source.bytes)/1024/1024, 3) as ssb
+  FROM "filebeat-7.7.0" 
+  WHERE netflow.exporter.timestamp BETWEEN '2020-05-31T17:30:00' 
+  AND '2020-05-31T21:40:00' 
+  AND destination.ip='11.21.13.178' GROUP BY source.ip 
+  """
+}
 ```
