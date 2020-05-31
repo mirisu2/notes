@@ -14,8 +14,8 @@ POST /_sql?format=txt
   "query": """
   SELECT source.ip, SUM(source.bytes) as ssb
   FROM "filebeat-7.7.0" 
-  WHERE netflow.exporter.timestamp BETWEEN '2020-05-31T10:47:00'
-  AND '2020-05-31T10:49:00' GROUP BY source.ip ORDER BY ssb DESC LIMIT 10
+  WHERE netflow.exporter.timestamp BETWEEN '2020-05-31T10:47:00' AND '2020-05-31T10:49:00' 
+  GROUP BY source.ip ORDER BY ssb DESC LIMIT 10
   """
 }
 
