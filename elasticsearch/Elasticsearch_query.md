@@ -1,4 +1,4 @@
-## SQL access
+### [SQL access](https://www.elastic.co/guide/en/elasticsearch/reference/7.7/xpack-sql.html)
 ```
 POST /_sql?format=txt
 {
