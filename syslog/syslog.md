@@ -64,7 +64,10 @@ man logger
 #### [omfile](https://www.rsyslog.com/doc/v8-stable/configuration/modules/omfile.html?highlight=omfile): File Output Module
 ```
 if ( $syslogfacility-text == "local4" and not ($msg contains 'Bla bla bla' or $msg contains 'VLAN(33)') ) then {
-    action(type="omfile" file="/var/log/cisco.log")
+    action(
+        type="omfile" 
+        file="/var/log/cisco.log"
+    )
 }
 ```
 #### [omprog](https://www.rsyslog.com/doc/v8-stable/configuration/modules/omprog.html): Program integration Output module
