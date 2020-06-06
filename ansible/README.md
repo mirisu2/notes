@@ -3,6 +3,12 @@
 pip install yamllint
 yamllint hosts.yaml
 ```
+#### [Ansible-lint](https://github.com/ansible/ansible-lint) checks playbooks for practices and behaviour that could potentially be improved.
+```
+pip install ansible-lint
+ansible-lint vmware_guest_create.yaml
+```
+
 ## Install ansible
 ```pip3 install ansible```
 ## Installing argcomplete with pip
