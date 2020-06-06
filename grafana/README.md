@@ -33,7 +33,8 @@ Installs HTML/JS/CSS and other Grafana files at:
 ```
 
 #### [Configuration](https://grafana.com/docs/grafana/latest/installation/configuration/)
-> All options in the configuration file can be overridden using environment variables using the syntax: GF_<SectionName>_<KeyName>
+> All options in the configuration file can be overridden using environment variables using the syntax: 
+> GF_<SectionName>_<KeyName>
 ```
 # default section
 instance_name = ${HOSTNAME}
