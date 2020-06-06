@@ -1,3 +1,7 @@
+> Проверка форматирования YAML
+> pip install yamllint
+> yamllint hosts.yaml
+
 ## Install ansible
 ```pip3 install ansible```
 ## Installing argcomplete with pip
