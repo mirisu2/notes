@@ -8,7 +8,11 @@ yamllint hosts.yaml
 pip install ansible-lint
 ansible-lint vmware_guest_create.yaml
 ```
-
+#### Проверка синтаксиса сценария. Запуск сценария в тестовом режиме.
+```
+ansible-playbook –i inventory <playbook_path> --check-syntax
+ansible-playbook –i inventory <playbook_path> --check
+```
 ## Install ansible
 ```pip3 install ansible```
 ## Installing argcomplete with pip
