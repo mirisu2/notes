@@ -60,5 +60,43 @@ type = mysql, postgres or sqlite3
 path = /var/lib/grafana/grafana.db 
 
 [remote_cache]
+type = Either redis, memcached or database
+# конфигурация redis и memcache на сайте 
 
+[security]
+admin_user = admin
+admin_password = admin
+disable_brute_force_login_protection = false
+
+[users]
+allow_sign_up = false
+
+[auth]
+Authentication Overview (anonymous access options, hide login and more)
+Google OAuth (auth.google)
+GitHub OAuth (auth.github)
+Gitlab OAuth (auth.gitlab)
+Generic OAuth (auth.generic_oauth, okta2, auth0, bitbucket, azure)
+Basic Authentication (auth.basic)
+LDAP Authentication (auth.ldap)
+Auth Proxy (auth.proxy)
+
+[dashboards]
+# ms, s, m, h, d
+min_refresh_interval = 1m
+
+[smtp]
+enabled = true
+host = localhost:25
+user = admin
+password = passwd123
+from_address = 
+from_name = 
+
+[log]
+# Either “console”, “file”, “syslog”. Default is “console” and “file”. Use spaces to separate multiple modes, e.g.
+mode = console file
+# Either “debug”, “info”, “warn”, “error”, “critical”, default is info
+level = info
 ```
+
