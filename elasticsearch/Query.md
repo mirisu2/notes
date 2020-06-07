@@ -318,6 +318,7 @@ GET /test/_search?pretty=true
 # пагинация
 
 # Count result
+GET /filebeat-7.7.0-*/_count?q=destination.ip:1.1.1.1
 GET /test/_count?q=age:35
 {
   "count" : 2,
@@ -433,5 +434,56 @@ POST /test/_search
 ```
 ### Chapter 5
 ```
+POST /test/_search
+{
+  "query": {
+    "term": { "age": 25 }
+  }
+}
+# OR (кмк c фильтром быстрее идет поиск)
+POST /test/_search
+{
+  "query": {
+    "bool": {
+      "filter": {
+        "term": { "age": 25 }
+      }
+    }
+  }
+}
+
+GET /test/_search
+{
+  "query": {
+    "terms": {
+      "age": [17, 55]
+    }
+  }
+}
+
+# вложенные селекты стр.217
+
+GET /filebeat-7.7.0-*/_search?size=1
+GET /filebeat-7.7.0-*/_search
+{
+  "size": 2,
+  "query": {
+    "prefix": { "destination.as.organization.name": "YAND" }
+  }
+}
+# reverse_analyzer стр.222
+
+# The wildcard is very similar to a regular expression, but it has only two special characters
+# *: This means match zero or more characters
+# ?: This means match one character
+POST /test/_search
+{
+  "query": {
+    "wildcard": { "name": "????n" }
+  }
+}
+
+
+
 
 ```
