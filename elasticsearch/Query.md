@@ -288,5 +288,46 @@ POST /test/_update/1
 ```
 ### Chapter 4
 ```
+GET /mybooks/_search
+{
+  "query": {
+    "match_all": {}
+  }
+}
+
+GET /test/_search?q=age:35&explain=true
+
+GET /test/_search?pretty=true
+{
+  "query": {
+    "match_all": {}
+  },
+  "sort": [
+    {
+      "age": {
+        "order": "desc",
+      }
+    }
+  ]
+}
+
+# Highlighting results
+# подсветка найденного слова в большом выводе
+
+# scrolling query
+# пагинация
+
+# Count result
+GET /test/_count?q=age:35
+{
+  "count" : 2,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  }
+}
+
 
 ```
