@@ -1,3 +1,4 @@
+```
 PUT test
 {
   "acknowledged" : true,
@@ -97,3 +98,4 @@ DELETE test
 {
   "acknowledged" : true
 }
+```
