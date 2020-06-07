@@ -48,6 +48,8 @@ GET test/_mapping
   }
 }
 
+GET index_1,index_2/_search
+
 GET test/_search
 {
   "took" : 0,
