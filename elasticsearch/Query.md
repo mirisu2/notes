@@ -372,4 +372,70 @@ POST /test/_update_by_query
   "failures" : [ ]
 }
 
+# Using a Boolean query
+# must, must_not, should, filter
+POST /test/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {"term": {
+          "age": {
+            "value": 25
+          }
+        }}
+      ]
+    }
+  }
+}
+
+POST /test/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {"term": {
+          "age": {
+            "value": 25
+          }
+        }}
+      ],
+      "must_not": [
+        {
+          "term": {
+            "name": {
+              "value": "Alice"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+
+POST /test/_search
+{
+  "query": {
+    "bool": {
+    
+      "must": [
+        { "term": { "age": 25 } },
+        { "term": { "name": "Jeck" } }
+      ],
+      
+      "must_not": [ 
+        { "term": { "name": { "value": "Alice" } } } 
+      ]
+      
+    }
+  }
+}
+
+
+
+
+
+
+
+
 ```
