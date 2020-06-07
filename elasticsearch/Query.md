@@ -98,4 +98,19 @@ DELETE test
 {
   "acknowledged" : true
 }
+
+PUT test
+PUT test/_mapping
+{
+  "properties" : {
+    "id" : {"type" : "keyword"},
+    "date" : {"type" : "date"},
+    "customer_id" : {"type" : "keyword"},
+    "sent" : {"type" : "boolean"},
+    "name" : {"type" : "keyword"},
+    "quantity" : {"type" : "integer"},
+    "price" : {"type" : "double"},
+    "vat" : {"type" : "double", "index":"false"}
+  }
+}
 ```
