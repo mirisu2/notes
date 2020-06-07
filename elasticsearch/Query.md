@@ -329,5 +329,47 @@ GET /test/_count?q=age:35
   }
 }
 
+DELETE /mybooks,test/_delete_by_query
+POST /test/_delete_by_query?q=age:35
+
+POST /test/_update_by_query
+{
+  "query": {
+    "match": {
+      "name": "Paul"
+    }
+  },
+  "script": {
+    "source": "ctx._source.age=25"
+  }
+}
+
+POST /test/_update_by_query
+{
+  "query": {
+    "match_all": {}
+  },
+  "script": {
+    "source": "ctx._source.age=17"
+  }
+}
+{
+  "took" : 30,
+  "timed_out" : false,
+  "total" : 3,
+  "updated" : 3,
+  "deleted" : 0,
+  "batches" : 1,
+  "version_conflicts" : 0,
+  "noops" : 0,
+  "retries" : {
+    "bulk" : 0,
+    "search" : 0
+  },
+  "throttled_millis" : 0,
+  "requests_per_second" : -1.0,
+  "throttled_until_millis" : 0,
+  "failures" : [ ]
+}
 
 ```
