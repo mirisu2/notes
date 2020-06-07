@@ -1,4 +1,7 @@
 # Elasticsearch
+> If we consider the index as a database in the SQL world, mapping is similar to the
+table definition.
+
 ### Установка [elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/7.7/deb.html#deb-repo)
 ```
 wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
