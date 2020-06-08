@@ -483,7 +483,125 @@ POST /test/_search
   }
 }
 
+# To speed up a regexp query, a good approach is to have a regular expression that doesn't start with a wildcard
+# To avoid poor performance in a search, don't execute regex starting with .*. Instead, use a prefix query on a 
+# string processed with a reverse analyzer.
+POST /mybooks/_search
+{
+  "query": {
+    "regexp": {
+      "description": {
+        "value": "j.*",
+        "flags": "INTERSECTION|COMPLEMENT|EMPTY"
+      }
+    }
+  }
+}
 
+# match...
+POST /mybooks/_search
+{
+  "query": {
+    "match": {
+      "description": {
+        "query": "nice guy",
+        "operator": "and"
+      }
+    }
+  }
+}
 
+POST /mybooks/_search
+{
+  "query": {
+    "match_phrase": {
+      "description": "nice guy"
+    }
+  }
+}
+
+POST /mybooks/_search
+{
+  "query": {
+    "match_phrase_prefix": {
+      "description": "nice gu"
+    }
+  }
+}
+
+# параметры стр. 238
+POST /mybooks/_search
+{
+  "query": {
+    "multi_match": {
+      "fields": [
+        "description",
+        "name"
+      ],
+      "query": "Bill",
+      "operator": "and"
+    }
+  }
+}
+
+# query_string
+
+GET /filebeat-7.7.0-*/_count
+{
+  "query": {
+    "bool": {
+      "filter": {
+        "range": {
+          "destination.ip": {
+            "gte": "1.1.1.0",
+            "lte": "1.1.1.255"
+          }
+        }
+      }
+    }
+  }
+}
+GET /filebeat-7.7.0-*/_search
+{
+  "size": 1,
+  "query": {
+    "bool": {
+      "filter": {
+        "range": {
+          "destination.ip": {
+            "gte": "1.1.1.0",
+            "lte": "1.1.1.255"
+          }
+        }
+      }
+    }
+  }
+}
+
+"range": {
+  "timestamp": {
+    "from": "2014-01-01",
+    "to": "2015-01-01",
+    "include_lower": true,
+    "include_upper": false
+  }
+}
+
+# common стр.251
+
+# The IDs query allows matching documents by their IDs
+POST /mybooks/_search
+{
+"query": {
+  "ids": {
+    "type": "test-type",
+      "values": [
+        "1",
+        "2",
+        "3"
+      ]
+    }
+  }
+}
 
 ```
