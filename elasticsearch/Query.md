@@ -35,6 +35,49 @@ GET /authors/_search
   ]
 }
 
+
+
+
+
+GET syslog_sshd_2020.05.31/_search
+{
+  "_source": ["host", "UserName", "FromHost", "method"], 
+  "query": {
+    "match_all": {}
+  }
+}
+GET syslog_sshd_2020.05.31/_search
+{
+  "_source": ["host", "UserName", "FromHost", "method"], 
+  "query": {
+    "match": {
+      "UserName": "ast"
+    }
+  }
+}
+GET syslog_sshd_2020.05.31/_search
+{
+  "_source": ["host", "UserName", "FromHost", "method"], 
+  "query": {
+    "term": {
+      "UserName": "ast"
+    }
+  }
+}
+GET syslog_sshd_2020.05.31/_search
+{
+  "_source": ["host", "UserName", "FromHost", "method"], 
+  "query": {
+    "prefix": {
+      "UserName": "as"
+    }
+  }
+}
+
+
+
+
+
 PUT test
 {
   "acknowledged" : true,
