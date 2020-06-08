@@ -1,5 +1,40 @@
 ### Chapter 3
 ```
+DELETE authors
+PUT authors
+{
+  "mappings": {
+    "properties": { "name": {"type": "keyword"}, "job": {"type": "integer"} }
+  }
+}
+POST authors/_bulk
+{ "index":{ "_index": "authors" } }
+{ "name":"Alice","job":7 }
+{ "index":{ "_index": "authors" } }
+{ "name":"Alice","job":3 }
+{ "index":{ "_index": "authors" } }
+{ "name":"Alice","job":5 }
+{ "index":{ "_index": "authors" } }
+{ "name":"Alice","job":4 }
+GET /authors/_search
+GET /authors/_search
+{
+  "query": {
+    "term": {
+      "name": {
+        "value": "Alice"
+      }
+    }
+  },
+  "sort": [
+    {
+      "job": {
+        "order": "desc"
+      }
+    }
+  ]
+}
+
 PUT test
 {
   "acknowledged" : true,
@@ -248,10 +283,8 @@ POST /filebeat-7.7.0-2020.06.04-000042/_delete_by_query
 # Update
 PUT test
 PUT test/_doc/1
-{
-  "name":"Paul", 
-  "age":35
-}
+{ "name":"Paul", "age":35 }
+
 GET test/_doc/1
 POST /test/_update/1
 {
@@ -373,6 +406,7 @@ POST /test/_update_by_query
   "failures" : [ ]
 }
 
+# For executing a term query as a filter, we need to use it wrapped in a Boolean query. 
 # Using a Boolean query
 # must, must_not, should, filter
 POST /test/_search
@@ -603,5 +637,104 @@ POST /mybooks/_search
     }
   }
 }
+
+POST /mybooks/_search
+{
+  "query": {
+    "exists": {
+      "field": "description"
+    }
+  }
+}
+POST /mybooks/_search
+{
+  "query": {
+    "bool": {
+      "must_not": {
+        "exists": {
+          "field": "description"
+        }
+      }
+    }
+  }
+}
+```
+### Chapter 7 (Aggregations)
+```
+# стр 292
+POST filebeat-7.7.0-2020.06.07-000057/_search?size=0
+{
+  "aggs": {
+    "source_bytes_stats": {
+      "sum": { "field": "source.bytes" }
+    }
+  }
+}
+
+POST test/_search?size=0
+{
+  "aggs": {
+    "my_age_stats": {
+      "extended_stats": {
+        "field": "age"
+      }
+    }
+  }
+}
+{
+...
+  "aggregations" : {
+    "age_stats" : {
+      "count" : 7,
+      "min" : 17.0,
+      "max" : 55.0,
+      "avg" : 27.857142857142858,
+      "sum" : 195.0,
+      "sum_of_squares" : 6439.0,
+      "variance" : 143.8367346938776,
+      "std_deviation" : 11.993195349608778,
+      "std_deviation_bounds" : {
+        "upper" : 51.84353355636041,
+        "lower" : 3.8707521579253026
+      }
+    }
+  }
+}
+
+POST filebeat-7.7.0-2020.06.07-000059/_search?size=0
+{
+  "aggs": {
+    "top10_source": {
+      "ip_range": {
+        "field": "source.ip",
+        "ranges": [
+        {
+          "to": nnn.nnn.n1.255"
+        },
+        {
+          "from": "nnn.nnn.n6.0"
+        }
+        ]
+      }
+    }
+  }
+}
+
+POST filebeat-7.7.0-2020.06.07-000059/_search?size=0
+{
+  "aggs": {
+    "my_ip_range": {
+      "ip_range": {
+        "field": "source.ip",
+        "ranges": [
+        {
+          "mask": "nnn.nnn.nnn.0/22"
+        } 
+        ]
+      }
+    }
+  }
+}
+
 
 ```
