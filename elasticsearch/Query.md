@@ -1,3 +1,5 @@
+> By default, a [cross-cluster](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-cross-cluster-search.html) search returns an error if any cluster in the request is unavailable. To skip an unavailable cluster during a cross-cluster search, set the `skip_unavailable` cluster setting to true.
+
 ### Chapter 3
 ```
 DELETE authors
@@ -19,6 +21,10 @@ POST authors/_bulk
 GET /authors/_search
 GET /authors/_search
 {
+  "_source": {
+    "includes": ["job"],
+    "excludes": ["name"]
+  }, 
   "query": {
     "term": {
       "name": {
