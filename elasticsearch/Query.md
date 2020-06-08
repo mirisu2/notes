@@ -1,6 +1,6 @@
 > By default, you cannot page through more than 10,000 documents using the `from` and `size` parameters. This limit is set using the [`index.max_result_window`](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html#index-max-result-window) index setting.
 
-> By default, Elasticsearch sorts matching search results by *relevance score*, which measures how well each document matches a query.
+> By default, Elasticsearch sorts matching search results by *relevance score*, which measures how well each document matches a query. Score calculation also depends on whether the query clause is run in a *query* or *filter* context.
 
 > By default, a [cross-cluster](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-cross-cluster-search.html) search returns an error if any cluster in the request is unavailable. To skip an unavailable cluster during a cross-cluster search, set the `skip_unavailable` cluster setting to true.
 
