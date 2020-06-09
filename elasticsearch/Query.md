@@ -14,6 +14,8 @@
 
 > `wildcard` Can only use wildcard queries on keyword and text fields - not on [netflow.destination_ipv4_address] which is of type [ip]
 
+> To better search `text` fields, the `match query` also analyzes your provided search term before performing a search. This means the `match query` can search `text` fields for analyzed tokens rather than an exact term.
+
 ### Compound queries
 #### Boolean query 
 * `must` - The clause (query) must appear in matching documents and will contribute to the score.
@@ -148,11 +150,68 @@ GET filebeat-7.7.0-*/_search
 ### [Term-level queries](https://www.elastic.co/guide/en/elasticsearch/reference/current/term-level-queries.html)
 You can use term-level queries to find documents based on precise values in structured data. Examples of structured data include date **ranges**, **IP addresses**, **prices**, or **product IDs**.
 * [`exists`](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-exists-query.html) - вернет документы где есть искомое поле! 
-*
-*
-*
-*
-
+```
+GET /_search
+{
+    "query": {
+        "exists": { "field": "UserName" }
+    }
+}
+```
+* [`ids`](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-ids-query.html)
+```
+GET /_search
+{
+    "query": {
+        "ids" : { "values" : ["1", "4", "100"] }
+    }
+}
+```
+* [`prefix`](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-prefix-query.html)
+* [`range`](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-range-query.html)
+* [`regexp`](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-regexp-query.html) [regular expression syntax](https://www.elastic.co/guide/en/elasticsearch/reference/current/regexp-syntax.html)
+```
+# To speed up a regexp query, a good approach is to have a regular expression that doesn't start with a wildcard
+# To avoid poor performance in a search, don't execute regex starting with .*. Instead, use a prefix query on a 
+# string processed with a reverse analyzer.
+POST /mybooks/_search
+{
+  "query": {
+    "regexp": {
+      "description": {
+        "value": "j.*",
+        "flags": "INTERSECTION|COMPLEMENT|EMPTY"
+      }
+    }
+  }
+}
+```
+* [`term`](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html)
+* [`terms`](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html)
+```
+GET /_search
+{
+    "query" : {
+        "terms" : {
+            "user" : ["kimchy", "elasticsearch"],
+            "boost" : 1.0
+        }
+    }
+}
+```
+* [`terms_set `](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-set-query.html)
+* [`wildcard`](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html)
+```
+# The wildcard is very similar to a regular expression, but it has only two special characters
+# *: This means match zero or more characters
+# ?: This means match one character
+POST /test/_search
+{
+  "query": {
+    "wildcard": { "name": "????n" }
+  }
+}
+```
 
 
 
@@ -718,30 +777,7 @@ GET /filebeat-7.7.0-*/_search
 }
 # reverse_analyzer стр.222
 
-# The wildcard is very similar to a regular expression, but it has only two special characters
-# *: This means match zero or more characters
-# ?: This means match one character
-POST /test/_search
-{
-  "query": {
-    "wildcard": { "name": "????n" }
-  }
-}
 
-# To speed up a regexp query, a good approach is to have a regular expression that doesn't start with a wildcard
-# To avoid poor performance in a search, don't execute regex starting with .*. Instead, use a prefix query on a 
-# string processed with a reverse analyzer.
-POST /mybooks/_search
-{
-  "query": {
-    "regexp": {
-      "description": {
-        "value": "j.*",
-        "flags": "INTERSECTION|COMPLEMENT|EMPTY"
-      }
-    }
-  }
-}
 
 # match...
 POST /mybooks/_search
