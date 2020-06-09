@@ -229,8 +229,10 @@ POST /test/_search
   }
 }
 ```
-
-
+### [Aggregations](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations.html)
+* [`Bucket aggregations`](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket.html)
+* [`Metrics aggregations`](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics.html)
+* [`Pipeline aggregations`](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline.html)
 
 
 
