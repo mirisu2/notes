@@ -245,7 +245,7 @@ POST /test/_search
 * [`Bucket aggregations`](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket.html)
 > Bucket aggregations, as opposed to metrics aggregations, can hold sub-aggregations. These sub-aggregations will be aggregated for the buckets created by their "parent" bucket aggregation.
 
-[composite aggregation](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-composite-aggregation.html)
+[composite aggregation](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-composite-aggregation.html) используется в основном в пагинации "after_key"
 > The `sources` parameter controls the sources that should be used to build the composite buckets. The order that the `sources` are defined is important because it also controls the order the keys are returned.
 
 There are three different types of values source:
@@ -253,6 +253,9 @@ There are three different types of values source:
 * histogram 
 * date_histogram 
 > The `sources` parameter accepts an array of values source. It is possible to mix different values source to create composite buckets.
+
+[Terms Aggregation](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-terms-aggregation.html)
+> A `multi-bucket` value source based aggregation where buckets are dynamically built - one per unique value.
 
 * [`Metrics aggregations`](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics.html)
 ```
