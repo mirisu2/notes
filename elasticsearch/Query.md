@@ -245,12 +245,14 @@ POST /test/_search
 * [`Bucket aggregations`](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket.html)
 > Bucket aggregations, as opposed to metrics aggregations, can hold sub-aggregations. These sub-aggregations will be aggregated for the buckets created by their "parent" bucket aggregation.
 
+[composite aggregation](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-composite-aggregation.html)
+> The `sources` parameter controls the sources that should be used to build the composite buckets. The order that the `sources` are defined is important because it also controls the order the keys are returned.
+
 There are three different types of values source:
 * terms
 * histogram 
 * date_histogram 
-
-> The `sources` parameter controls the sources that should be used to build the composite buckets. The order that the `sources` are defined is important because it also controls the order the keys are returned.
+> The `sources` parameter accepts an array of values source. It is possible to mix different values source to create composite buckets.
 
 * [`Metrics aggregations`](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics.html)
 ```
