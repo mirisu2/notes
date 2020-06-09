@@ -264,14 +264,6 @@ POST filebeat-7.7.0-*/_search
       "flow_count" : { "value_count" : { "field" : "network.bytes" } }
   }
 }
-
-# value count
-POST /sales/_search?size=0
-{
-    "aggs" : {
-        "types_count" : { "value_count" : { "field" : "type" } }
-    }
-}
 ```
 * [`Pipeline aggregations`](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline.html)
 
