@@ -249,16 +249,19 @@ POST /test/_search
 ```
 POST filebeat-7.7.0-*/_search
 {
-  "_source": ["network_bytes"], 
+  "size" : 0,
+  "_source" : false,
   "query" : {
       "constant_score" : {
           "filter" : {
-              "match" : { "netflow.destination_ipv4_address" : "nnn.nnn.nnn.178" }
+              "match" : { "netflow.source_ipv4_address" : "1.0.0.55" }
           }
       }
   },
   "aggs" : {
-      "network_bytes" : { "sum" : { "field" : "network.bytes" } }
+      "network_bytes" : { "sum" : { "field" : "network.bytes" } },
+      "network_packets" : { "sum" : { "field" : "network.packets" } },
+      "flow_count" : { "value_count" : { "field" : "network.bytes" } }
   }
 }
 
