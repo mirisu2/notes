@@ -136,7 +136,21 @@ GET filebeat-7.7.0-*/_search
   }
 }
 ```
-
+### Full text queries
+`match` - Returns documents that match a provided text, number, date or boolean value. The provided text is analyzed before matching.
+```
+GET /_search
+{
+  "query": {
+    "match" : {
+      "message" : {
+        "query" : "this is a test",
+        "operator" : "and"
+      }
+    }
+  }
+}
+```
 
 
 
