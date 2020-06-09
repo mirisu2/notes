@@ -56,7 +56,7 @@ GET filebeat-7.7.0-*/_search
   }
 }
 
-# "_score" : 1.0
+# match_all возвращает все документы и присваивает им по умолчанию "_score" : 1.0
 GET filebeat-7.7.0-*/_search
 {
   "query": {
@@ -145,19 +145,7 @@ GET filebeat-7.7.0-*/_search
 * [`simple_query_string`](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-simple-query-string-query.html)
 
 
-```
-GET /_search
-{
-  "query": {
-    "match" : {
-      "message" : {
-        "query" : "this is a test",
-        "operator" : "and"
-      }
-    }
-  }
-}
-```
+
 
 
 
