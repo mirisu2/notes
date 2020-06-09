@@ -25,6 +25,8 @@
 
 > The `constant_score` query assigns a score of 1.0 to all documents matched by the filter.
 
+> Boosting query - positive/negative(Query used to decrease the relevance score of matching documents.)
+
 ```
 # "_score" : 1.0
 GET filebeat-7.7.0-*/_search
