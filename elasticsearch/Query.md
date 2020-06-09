@@ -230,6 +230,18 @@ POST /test/_search
 }
 ```
 ### [Aggregations](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations.html)
+```
+"aggregations" : {
+    "<aggregation_name>" : {
+        "<aggregation_type>" : {
+            <aggregation_body>
+        }
+        [,"meta" : {  [<meta_data_body>] } ]?
+        [,"aggregations" : { [<sub_aggregation>]+ } ]?
+    }
+    [,"<aggregation_name_2>" : { ... } ]*
+}
+```
 * [`Bucket aggregations`](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket.html)
 * [`Metrics aggregations`](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics.html)
 * [`Pipeline aggregations`](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline.html)
