@@ -18,8 +18,135 @@
 #### Boolean query 
 * `must` - The clause (query) must appear in matching documents and will contribute to the score.
 * `filter` - The clause (query) must appear in matching documents. However unlike must the score of the query will be ignored.
+* `should` - The clause (query) should appear in the matching document.
+* `must_not` - The clause (query) must not appear in the matching documents. 
 
-> `bool` - the better while the `must_not` and `filter` clauses are executed in filter context.
+> the better while the `must_not` and `filter` clauses are executed in filter context.
+
+> The `constant_score` query assigns a score of 1.0 to all documents matched by the filter.
+
+```
+# "_score" : 1.0
+GET filebeat-7.7.0-*/_search
+{
+  "query": {
+    "term": { "netflow.source_ipv4_address": "nnn.nnn.nnn.178" }
+  }
+}
+
+# "_score" : 0.0
+GET filebeat-7.7.0-*/_search
+{
+  "query": {
+    "bool": {
+      "filter": { "term": { "netflow.source_ipv4_address": "nnn.nnn.nnn.178" } }
+    }
+  }
+}
+
+# "_score" : 1.0
+GET filebeat-7.7.0-*/_search
+{
+  "query": {
+    "bool": {
+      "must": { "term": { "netflow.source_ipv4_address": "nnn.nnn.nnn.178" } }
+    }
+  }
+}
+
+# "_score" : 1.0
+GET filebeat-7.7.0-*/_search
+{
+  "query": {
+    "bool": {
+      "must": {
+        "match_all": {}
+      },
+      "filter": { "term": { "netflow.source_ipv4_address": "nnn.nnn.nnn.178" } }
+    }
+  }
+}
+
+# "_score" : 1.0
+GET filebeat-7.7.0-*/_search
+{
+  "query": { 
+    "bool": { 
+      
+      "must": [
+        { "term": { "netflow.source_ipv4_address": "nnn.nnn.nnn.178" }}
+      ],
+      
+      "filter": [ 
+        { "term":  { "netflow.destination_ipv4_address": "169.254.169.254" }}
+      ]
+      
+    }
+  }
+}
+
+# "_score" : 1.0
+GET filebeat-7.7.0-*/_search
+{
+  "_source": ["netflow.source_ipv4_address", "netflow.destination_ipv4_address", "source.as.number"],
+  "query": { 
+    "bool": { 
+      "must": [
+        { "term": { "netflow.source_ipv4_address": "nnn.nnn.nnn.178" }}
+      ],
+      "filter": [
+        { "term": { "source.as.number": "234234" } }, 
+        { "range": { "netflow.destination_ipv4_address": {
+            "gte": "192.204.0.0",
+            "lte": "192.204.255.255"
+          }}}
+      ]
+    }
+  }
+}
+
+# "_score" : 1.0
+GET filebeat-7.7.0-*/_search
+{
+  "_source": ["netflow.source_ipv4_address", "netflow.destination_ipv4_address", "source.as.number"],
+  "query": { 
+    "bool": { 
+      "must": [
+        { "term": { "netflow.source_ipv4_address": "nnn.nnn.nnn.178" }}
+      ],
+      "must_not": [
+        { "range": { "netflow.destination_ipv4_address": {
+            "gte": "192.204.0.0",
+            "lte": "192.204.255.255"
+          }}}
+      ]
+    }
+  }
+}
+
+# "_score" : 1.0
+GET filebeat-7.7.0-*/_search
+{
+  "query": {
+    "constant_score": {
+      "filter":  {  "term":  { "netflow.destination_ipv4_address": "169.254.169.254" } }
+    }
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ### Chapter 3
 ```
