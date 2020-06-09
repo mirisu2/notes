@@ -243,6 +243,8 @@ POST /test/_search
 }
 ```
 * [`Bucket aggregations`](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket.html)
+> Bucket aggregations, as opposed to metrics aggregations, can hold sub-aggregations. These sub-aggregations will be aggregated for the buckets created by their "parent" bucket aggregation.
+
 * [`Metrics aggregations`](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics.html)
 ```
 POST filebeat-7.7.0-*/_search
@@ -258,6 +260,14 @@ POST filebeat-7.7.0-*/_search
   "aggs" : {
       "network_bytes" : { "sum" : { "field" : "network.bytes" } }
   }
+}
+
+# value count
+POST /sales/_search?size=0
+{
+    "aggs" : {
+        "types_count" : { "value_count" : { "field" : "type" } }
+    }
 }
 ```
 * [`Pipeline aggregations`](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline.html)
