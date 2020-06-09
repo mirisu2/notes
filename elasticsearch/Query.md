@@ -10,6 +10,7 @@
 
 > In Elasticsearch, the deleted document is not removed from disk, but is marked as deleted (and referred to as a tombstone). To free up space, you need to `forcemerge` to purge deleted documents.
 
+> `prefix` Can only use prefix queries on `keyword` and `text` fields - not on [netflow.source_ipv4_address] which is of type [ip]
 
 ### Chapter 3
 ```
@@ -82,7 +83,6 @@ GET syslog_sshd_2020.05.31/_search
   }
 }
 
-# `prefix` Can only use prefix queries on keyword and text fields - not on [netflow.source_ipv4_address] which is of type [ip]
 GET syslog_sshd_2020.05.31/_search
 {
   "_source": ["host", "UserName", "FromHost", "method"], 
