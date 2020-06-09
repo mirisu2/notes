@@ -12,6 +12,7 @@
 
 > `prefix` Can only use prefix queries on `keyword` and `text` fields - not on [netflow.source_ipv4_address] which is of type [ip]
 
+> `wildcard` Can only use wildcard queries on keyword and text fields - not on [netflow.destination_ipv4_address] which is of type [ip]
 ### Chapter 3
 ```
 DELETE authors
