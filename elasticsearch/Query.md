@@ -256,7 +256,66 @@ There are three different types of values source:
 
 [Terms Aggregation](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-terms-aggregation.html)
 > A `multi-bucket` value source based aggregation where buckets are dynamically built - one per unique value.
-
+```
+# TOP 20 records ordered by bytes per ip
+POST filebeat-7.7.0-*/_search
+{
+  "size" : 0,
+  "_source" : false,
+  "stored_fields" : "_none_",
+  "track_total_hits": true,
+    "query": { 
+    "bool": { 
+      "filter": [
+        { "range": { "@timestamp": {
+            "gte": "now-15m",
+            "lte": "now"          
+        }}},
+        { "range": { "netflow.source_ipv4_address": {
+            "gte": "nnn.nnn.nnn.0",
+            "lte": "nnn.nnn.nnn.255"
+          }}}
+      ]
+    }
+  },
+  "aggs": {
+    "group_by" : {
+            "terms" : {
+                "field" : "netflow.source_ipv4_address",
+                "size" : 20,
+                "order" : { "network_bytes" : "desc" }
+            },
+      "aggs": {
+        "network_bytes" : {
+          "sum" : { "field" : "network.bytes" }
+        },
+        "network_packets": {
+          "sum" : { "field" : "network.packets" }          
+        },
+        "flow_count" : { "value_count" : { "field" : "network.bytes" } }
+          
+      }
+    }
+  }
+}
+POST filebeat-7.7.0-*/_search
+{
+  "size" : 0,
+  "_source" : false,
+  "query" : {
+      "constant_score" : {
+          "filter" : {
+              "match" : { "netflow.source_ipv4_address" : "1.0.0.55" }
+          }
+      }
+  },
+  "aggs" : {
+      "network_bytes" : { "sum" : { "field" : "network.bytes" } },
+      "network_packets" : { "sum" : { "field" : "network.packets" } },
+      "flow_count" : { "value_count" : { "field" : "network.bytes" } }
+  }
+}
+```
 * [`Metrics aggregations`](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics.html)
 ```
 POST filebeat-7.7.0-*/_search
