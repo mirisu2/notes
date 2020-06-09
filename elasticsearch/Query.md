@@ -136,8 +136,15 @@ GET filebeat-7.7.0-*/_search
   }
 }
 ```
-### Full text queries
-[`match`](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html) - Returns documents that match a provided text, number, date or boolean value. The provided text is analyzed before matching.
+### [Full text](https://stackoverflow.com/questions/26001002/elasticsearch-difference-between-term-match-phrase-and-query-string#:~:text=term%20query%20matches%20a%20single,the%20value%20is%20not%20analyzed.&text=match_phrase%20query%20will%20analyze%20the,order%20as%20the%20input%20value) queries
+* [`match_phrase`](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query-phrase.html)
+* [`match`](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html) - Returns documents that match a provided text, number, date or boolean value. The provided text is analyzed before matching.
+* [`multi_match`](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html)
+* [`common`](elastic.co/guide/en/elasticsearch/reference/current/query-dsl-common-terms-query.html#_the_problem)
+* [`query_string`](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html)
+* [`simple_query_string`](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-simple-query-string-query.html)
+
+
 ```
 GET /_search
 {
