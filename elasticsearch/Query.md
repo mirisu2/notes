@@ -244,6 +244,22 @@ POST /test/_search
 ```
 * [`Bucket aggregations`](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket.html)
 * [`Metrics aggregations`](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics.html)
+```
+POST filebeat-7.7.0-*/_search
+{
+  "_source": ["network_bytes"], 
+  "query" : {
+      "constant_score" : {
+          "filter" : {
+              "match" : { "netflow.destination_ipv4_address" : "nnn.nnn.nnn.178" }
+          }
+      }
+  },
+  "aggs" : {
+      "network_bytes" : { "sum" : { "field" : "network.bytes" } }
+  }
+}
+```
 * [`Pipeline aggregations`](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline.html)
 
 
