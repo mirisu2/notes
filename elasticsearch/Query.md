@@ -145,11 +145,13 @@ GET filebeat-7.7.0-*/_search
 * [`simple_query_string`](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-simple-query-string-query.html)
 
 
-
-
-
-
-
+### [Term-level queries](https://www.elastic.co/guide/en/elasticsearch/reference/current/term-level-queries.html)
+You can use term-level queries to find documents based on precise values in structured data. Examples of structured data include date **ranges**, **IP addresses**, **prices**, or **product IDs**.
+* [`exists`](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-exists-query.html) - вернет документы где есть искомое поле! 
+*
+*
+*
+*
 
 
 
