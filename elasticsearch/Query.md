@@ -25,7 +25,7 @@
 
 > The `constant_score` query assigns a score of 1.0 to all documents matched by the filter.
 
-> Boosting query - positive/negative(Query used to decrease the relevance score of matching documents.)
+> [Boosting](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-boosting-query.html) query - positive/negative(Query used to decrease the relevance score of matching documents.)
 
 ```
 # "_score" : 1.0
