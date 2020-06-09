@@ -137,6 +137,23 @@ GET filebeat-7.7.0-*/_search
     }
   }
 }
+
+# Last 20 ssh logins
+GET syslog_sshd_*/_search
+{
+  "_source": ["timestamp", "host", "UserName", "FromHost", "method"], 
+  "size": 20, 
+  "query": {
+    "match_all": {}
+  },
+  "sort": [
+    {
+      "@timestamp": {
+        "order": "desc"
+      }
+    }
+  ]
+}
 ```
 ### [Full text](https://stackoverflow.com/questions/26001002/elasticsearch-difference-between-term-match-phrase-and-query-string#:~:text=term%20query%20matches%20a%20single,the%20value%20is%20not%20analyzed.&text=match_phrase%20query%20will%20analyze%20the,order%20as%20the%20input%20value) queries
 * [`match_phrase`](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query-phrase.html)
