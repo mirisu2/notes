@@ -10,6 +10,7 @@
 
 > In Elasticsearch, the deleted document is not removed from disk, but is marked as deleted (and referred to as a tombstone). To free up space, you need to `forcemerge` to purge deleted documents.
 
+
 ### Chapter 3
 ```
 DELETE authors
