@@ -133,6 +133,19 @@ output {
             zabbix_key => "[@metadata][zabbix_key]"
             zabbix_value => "[@metadata][zabbix_value]"
         }
+        email {
+            to => 'adminm@domain.ru'
+            from => 'logstash.alert@domain.ru'
+            subject => 'Alert! Successful login to %{host}'
+            body => 'Host %{host} accepted %{method} for %{UserName} from %{FromHost}'
+            address => "smtp.domain.ru"
+            port => 587
+            username => 'logstash.alert@domain.ru'
+            password => 'pass4rd'
+            via => 'smtp'
+            use_tls => true
+            debug => false
+        }       
     }
     if [@metadata][source] == "local6" {
         if !("_grokparsefailure" in [tags]) {
