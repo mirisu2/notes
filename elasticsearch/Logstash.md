@@ -121,13 +121,11 @@ filter {
 * 99-output.conf
 ```
 output {
-
     if [@metadata][source] == "sshd" {
         elasticsearch {
             hosts => ["http://192.168.198.101:9200"]
             index => "syslog_sshd_%{+YYYY.MM.dd}"
         }
-
         zabbix {
             zabbix_server_host => "80.254.16.46"
             zabbix_server_port => 10051
@@ -136,7 +134,6 @@ output {
             zabbix_value => "[@metadata][zabbix_value]"
         }
     }
-
     if [@metadata][source] == "local6" {
         if !("_grokparsefailure" in [tags]) {
             elasticsearch {
@@ -145,7 +142,6 @@ output {
             }
         }
     }
-
     if [@metadata][source] == "local5" {
         if !("_grokparsefailure" in [tags]) {
             elasticsearch {
@@ -154,14 +150,12 @@ output {
             }
         }
     }
-
     if [@metadata][source] == "local4" {
             elasticsearch {
                 hosts => ["http://192.168.198.101:9200"]
                 index => "syslog_dlink_%{+YYYY.MM.dd}"
             }
     }
-
 }
 ```
 > zabbix_host - хост в zabbix сервере. zabbix_key - название itemkey привязанный к zabbix_host
