@@ -145,7 +145,10 @@ output {
             via => 'smtp'
             use_tls => true
             debug => false
-        }       
+        }
+        pipe {
+            command => "/usr/share/logstash/bin/telegram.py 'Host %{host} accepted %{method} for %{UserName} from %{FromHost}'"
+        }
     }
     if [@metadata][source] == "local6" {
         if !("_grokparsefailure" in [tags]) {
