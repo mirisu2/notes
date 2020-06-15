@@ -1,4 +1,6 @@
 # Elasticsearch
+> The Elasticsearch REST APIs support structured queries, full text queries, and complex queries that combine the two. Structured queries are similar to the types of queries you can construct in SQL.
+
 > If we consider the index as a database in the SQL world, mapping is similar to the
 table definition.
 
