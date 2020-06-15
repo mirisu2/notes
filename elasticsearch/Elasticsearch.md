@@ -53,6 +53,12 @@ wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add
 sudo apt-get install apt-transport-https
 echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
 sudo apt-get update && sudo apt-get install elasticsearch
+
+[1]: memory locking requested for elasticsearch process but memory is not locked
+vim /usr/lib/systemd/system/elasticsearch.service
+[Service]
+LimitMEMLOCK=infinity
+TimeoutStartSec=180
 ```
 > elasticsearch не стартует автоматически, его необходимо включить и стартануть
 ```
