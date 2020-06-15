@@ -68,6 +68,8 @@ sudo systemctl start elasticsearch.service
 ```
 ### проверяем
 ```
+GET /_cluster/health?pretty=true
+
 curl -X GET http://localhost:9200
 {
   "name" : "elastic",
