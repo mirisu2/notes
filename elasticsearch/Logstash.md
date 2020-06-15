@@ -35,6 +35,10 @@ bin/logstash-plugin list
 bin/logstash-plugin list --verbose 
 bin/logstash-plugin list '*namefragment*' 
 bin/logstash-plugin list --group (input|filter|output) 
+
+/usr/share/logstash/bin/logstash-plugin install logstash-output-zabbix
+/usr/share/logstash/bin/logstash-plugin install logstash-output-email
+/usr/share/logstash/bin/logstash-plugin install logstash-output-pipe
 ```
 #### /etc/logstash/conf.d/
 * 10-syslog-input.conf
