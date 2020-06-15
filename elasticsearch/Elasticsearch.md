@@ -1,4 +1,38 @@
 # Elasticsearch
+
+#### [Voting-only](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-node.html) master-eligible node
+> A voting-only master-eligible node is a node that participates in master elections but which will not act as the cluster’s elected master node.
+
+```
+node.voting_only: true 
+```
+To create a dedicated voting-only master-eligible node in the default distribution, set:
+```
+node.master: true 
+node.voting_only: true 
+node.data: false 
+node.ingest: false 
+node.ml: false 
+xpack.ml.enabled: true 
+node.transform: false 
+xpack.transform.enabled: true 
+node.remote_cluster_client: false 
+```
+To create a dedicated data node in the default distribution, set:
+```
+node.master: false 
+node.voting_only: false 
+node.data: true 
+node.ingest: false 
+node.ml: false 
+node.transform: false 
+xpack.transform.enabled: true 
+node.remote_cluster_client: false 
+```
+
+
+> The [process](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-discovery-hosts-providers.html) operates in two phases: First, each node probes the seed addresses by connecting to each address and attempting to identify the node to which it is connected and to verify that it is master-eligible. Secondly, if successful, it shares with the remote node a list of all of its known master-eligible peers and the remote node responds with its peers in turn. The node then probes all the new nodes that it just discovered, requests their peers, and so on.
+
 > The Elasticsearch REST APIs support [structured queries](https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-overview.html), [full text queries](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html), and complex queries that combine the two. Structured queries are similar to the types of queries you can construct in SQL.
 
 > If we consider the index as a database in the SQL world, mapping is similar to the
