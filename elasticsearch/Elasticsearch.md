@@ -19,7 +19,9 @@ PUT _cluster/settings
 GET _nodes?filter_path=**.mlockall
 GET _nodes/stats/process?filter_path=**.max_file_descriptors
 GET /_cat/nodes
+GET /_cat/nodes?v
 GET /_cat/health
+GET _cat/health?v
 GET _cat/recovery
 GET /_cluster/health
 GET /_cluster/settings
@@ -28,6 +30,7 @@ GET /_nodes
 GET /_nodes/stats
 GET /_settings
 GET /filebeat-7.7.0/_settings
+GET /_cat/nodes?h=ip,name,version&v
 ```
 
 #### [Voting-only](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-node.html) master-eligible node
