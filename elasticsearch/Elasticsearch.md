@@ -1,5 +1,19 @@
 # Elasticsearch
 
+```
+GET _nodes?filter_path=**.mlockall
+GET _nodes/stats/process?filter_path=**.max_file_descriptors
+GET /_cat/nodes
+GET /_cat/health
+GET /_cluster/health
+GET /_cluster/settings
+GET /_license
+GET /_nodes
+GET /_nodes/stats
+GET /_settings
+GET /filebeat-7.7.0/_settings
+```
+
 #### [Voting-only](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-node.html) master-eligible node
 > A voting-only master-eligible node is a node that participates in master elections but which will not act as the cluster’s elected master node.
 
