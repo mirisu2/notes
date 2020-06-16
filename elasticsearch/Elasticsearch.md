@@ -1,10 +1,26 @@
 # Elasticsearch
 
+#### [Cluster restart](https://www.elastic.co/guide/en/elasticsearch/reference/current/restart-cluster.html)
 ```
+PUT _cluster/settings
+{
+  "persistent": {
+    "cluster.routing.allocation.enable": "primaries"
+  }
+}
+
+PUT _cluster/settings
+{
+  "persistent": {
+    "cluster.routing.allocation.enable": null
+  }
+}
+
 GET _nodes?filter_path=**.mlockall
 GET _nodes/stats/process?filter_path=**.max_file_descriptors
 GET /_cat/nodes
 GET /_cat/health
+GET _cat/recovery
 GET /_cluster/health
 GET /_cluster/settings
 GET /_license
