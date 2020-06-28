@@ -27,3 +27,16 @@ npx create-nuxt-app app_name
         npm run build
         npm run start
 ```
+
+#### [nuxt.config.js](https://nuxtjs.org/api)
+```
+export default {
+  mode: 'universal',
+  server:  {
+    port: 8000,
+    host: '0.0.0.0'
+  },
+  loading: false,
+  ...
+}
+```
