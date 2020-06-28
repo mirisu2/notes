@@ -11,3 +11,19 @@ apt-get autoremove
 curl -sL https://deb.nodesource.com/setup_14.x | bash -
 apt-get install -y nodejs
 ```
+
+### Generate nuxtjs app
+```
+npx create-nuxt-app app_name
+
+ To get started:
+
+        cd app_name
+        npm run dev
+
+  To build & start for production:
+
+        cd app_name
+        npm run build
+        npm run start
+```
