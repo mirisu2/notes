@@ -1,8 +1,8 @@
 ### install packages what we need
-
 ```
 apt-get install unattended-upgrades mailutils ssmtp
 ```
+
 ### /etc/apt/apt.conf.d/50unattended-upgrades
 ```
 Unattended-Upgrade::Origins-Pattern {
@@ -19,10 +19,12 @@ Unattended-Upgrade::Automatic-Reboot-Time "02:00";
 Unattended-Upgrade::SyslogEnable "true";
 Unattended-Upgrade::SyslogFacility "daemon";
 ```
+
 ### check
 ```
 unattended-upgrade -v -d --dry-run
 ```
+
 ### /etc/ssmtp/ssmtp.conf
 ```
 Root=no-reply@mydomain.ru
