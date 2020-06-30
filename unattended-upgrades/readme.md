@@ -3,7 +3,7 @@
 apt-get install unattended-upgrades mailutils ssmtp
 ```
 
-### /etc/apt/apt.conf.d/50unattended-upgrades
+#### /etc/apt/apt.conf.d/50unattended-upgrades
 ```
 Unattended-Upgrade::Origins-Pattern {
   "origin=Debian,codename=${distro_codename},label=Debian-Security";
@@ -26,7 +26,7 @@ Unattended-Upgrade::SyslogFacility "daemon";
 unattended-upgrade -v -d --dry-run
 ```
 
-### /etc/ssmtp/ssmtp.conf
+#### /etc/ssmtp/ssmtp.conf
 ```
 Root=no-reply@mydomain.ru
 mailhub=relay.mydomain.ru:587
