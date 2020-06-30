@@ -16,6 +16,7 @@ Unattended-Upgrade::Mail "receiver@mydomain.ru";
 Unattended-Upgrade::Automatic-Reboot "true";
 Unattended-Upgrade::Automatic-Reboot-WithUsers "false";
 Unattended-Upgrade::Automatic-Reboot-Time "02:00";
+Acquire::http::Dl-Limit "100";
 Unattended-Upgrade::SyslogEnable "true";
 Unattended-Upgrade::SyslogFacility "daemon";
 ```
