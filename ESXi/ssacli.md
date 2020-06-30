@@ -1,4 +1,4 @@
-## HPE Storage Controller Management (ssacli)
+## HPE Storage Controller Management (ssacli) ([HP Smart Array P410 Controller](https://h20195.www2.hpe.com/v2/GetDocument.aspx?docname=c04111713&doctype=quickspecs&doclang=EN_US&searchquery=&cc=kz&lc=ru))
 ### Location VMware ESXi 5.1/5.5/6.0
 ```
 /opt/hp/hpssacli/bin/hpssacli
@@ -167,7 +167,8 @@ Erase patterns available:
 ```
 ### License key
 ```
-In some cases a licence key needs to be installed on the SmartArray storage controller to enable the advanced features. This can be done with the following command:
+In some cases a licence key needs to be installed on the SmartArray storage controller to enable the advanced features. 
+This can be done with the following command:
 
 # License key installation
 ./ssacli ctrl slot=1 licensekey XXXXX-XXXXX-XXXXX-XXXXX-XXXXX
