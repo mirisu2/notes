@@ -1,3 +1,4 @@
+#### [Link](https://www.cisco.com/c/en/us/support/docs/switches/catalyst-2950-series-switches/12040-pswdrec-2900xl.html)
 #### 2950
 Release the Mode button after approximately 5 seconds when the Status (**STAT**) LED goes out. 
 When you release the Mode button, the **SYST** LED blinks amber.
