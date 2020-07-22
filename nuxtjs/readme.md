@@ -11,6 +11,14 @@ apt-get autoremove
 curl -sL https://deb.nodesource.com/setup_14.x | bash -
 apt-get install -y nodejs
 ```
+#### Node.js v12.x:
+```
+# Using Debian, as root
+curl -sL https://deb.nodesource.com/setup_12.x -o nodesource_setup.sh
+bash nodesource_setup.sh
+apt-get install -y nodejs
+```
+
 
 ### Generate nuxtjs app
 ```
