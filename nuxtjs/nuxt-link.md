@@ -5,7 +5,8 @@ pages/user/settings/_username.vue
 ```
 ##### Solution:
 ```
-Nuxt uses vue-router by reading off the vue-router documentation. Open .nuxt/router.js. This file contains information about routes
+Nuxt uses vue-router by reading off the vue-router documentation. Open .nuxt/router.js. 
+This file contains information about routes
 {
     path: "/user/settings/:username?",
     component: _505a7f2d,
@@ -15,7 +16,10 @@ Nuxt uses vue-router by reading off the vue-router documentation. Open .nuxt/rou
 ##### Code:
 ```
 <template>
-    <nuxt-link v-bind:to="{ name: 'user-settings-username', params: {username:user.username} }">{{ user.fname }} {{ user.lname }}</nuxt-link>
+    <nuxt-link v-bind:to="{ 
+        name: 'user-settings-username', 
+        params: {username:user.username} 
+    }">{{ user.fname }} {{ user.lname }}</nuxt-link>
 </template>
 <script>
 export default {
