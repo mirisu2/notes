@@ -26,7 +26,8 @@ export PATH=$PATH:/home/user/.local/bin
 ```activate-global-python-argcomplete```
 
 ## Check version and installation
-```ansible --version
+```
+ansible --version
 ansible 2.9.6
   config file = None
 ```
