@@ -14,7 +14,12 @@ ansible-playbook –i inventory <playbook_path> --check-syntax
 ansible-playbook –i inventory <playbook_path> --check
 ```
 ## Install ansible
-```pip3 install ansible```
+```
+pip3 install ansible
+vim .bashrc
+export ANSIBLE_HOST_KEY_CHECKING=False
+export PATH=$PATH:/home/user/.local/bin
+```
 ## Installing argcomplete with pip
 ```pip3 install argcomplete```
 ## Configuring argcomplete
