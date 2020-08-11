@@ -1,11 +1,11 @@
 #### Проверка форматирования YAML
 ```
-pip install yamllint
+pip3 install yamllint
 yamllint hosts.yaml
 ```
 #### [Ansible-lint](https://github.com/ansible/ansible-lint) checks playbooks for practices and behaviour that could potentially be improved.
 ```
-pip install ansible-lint
+pip3 install ansible-lint
 ansible-lint vmware_guest_create.yaml
 ```
 #### Проверка синтаксиса сценария. Запуск сценария в тестовом режиме.
