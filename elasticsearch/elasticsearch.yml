@@ -1,0 +1,33 @@
+cluster.name: pt-logging
+node.master: true
+node.voting_only: false
+node.data: true
+node.ingest: true
+node.ml: true
+xpack.ml.enabled: true
+node.transform: true
+xpack.transform.enabled: true
+node.remote_cluster_client: true
+
+node.name: es-node-9
+path.data: /var/lib/elasticsearch
+path.logs: /var/log/elasticsearch
+bootstrap.memory_lock: true
+network.host: 192.168.198.101
+http.port: 9200
+discovery.seed_hosts:
+   - es-node-9.domain.ru
+   - es-node-31.domain.ru
+   - es-node-9-vo.domain.ru
+cluster.initial_master_nodes:
+   - es-node-9.domain.ru
+   - es-node-31.domain.ru
+   - es-node-9-vo.domain.ru
+
+search.max_buckets: 10000
+xpack.sql.enabled: true
+transport.port: 9300
+transport.host: 192.168.198.101
+transport.compress: true
+
+indices.recovery.max_bytes_per_sec: 80mb
