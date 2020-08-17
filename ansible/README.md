@@ -40,6 +40,7 @@ ansible 2.9.6
 cat ansible.cfg
 [defaults]
 inventory = $HOME/hosts
+log_path = ansible.log
 
 ansible all --list-hosts
 ansible webservers --list-hosts
