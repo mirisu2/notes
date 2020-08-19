@@ -58,7 +58,7 @@ reachable by other containers on that network, and discoverable by them at a hos
 Your app’s network is given a name based on the “project name”, which is based on the name of the directory it lives in. 
 You can override the project name with either the --project-name flag or the COMPOSE_PROJECT_NAME environment variable.
 
-
+$ docker-compose up -d --build
 $ docker-compose --help
 Define and run multi-container applications with Docker.
 
