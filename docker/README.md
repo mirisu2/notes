@@ -281,3 +281,11 @@ docker image load < <FILE>.tar
 docker image load -i <FILE>.tar
 docker image load --input <FILE>.tar
 ```
+## Auto-restarting
+```
+--restart
+no
+on-failure
+always  #если контейнер остановить, то он не будет запущен после рестарта!
+unless-stopped
+```
