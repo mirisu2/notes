@@ -270,3 +270,13 @@ $ sshfs user@host:/path/to/remote/directory $LOCALPATH
 docker run -d -p 9000:9000 -p 8000:8000 --name portainer --restart always -v portainer_data:/data portainer/portainer \
 -H tcp://192.168.198.115:2375
 ```
+## Save and load images
+```
+docker image save <IMAGE> > <FILE>.tar
+docker image save <IMAGE> -o <FILE>.tar
+docker image save <IMAGE> --output <FILE>.tar
+
+docker image load < <FILE>.tar
+docker image load -i <FILE>.tar
+docker image load --input <FILE>.tar
+```
