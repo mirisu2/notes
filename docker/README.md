@@ -22,6 +22,7 @@ $ docker --help
 $ docker info
 $ docker system info
 $ docker stats
+$ docker top <CONTAINER>
 
 $ sudo vim /lib/systemd/system/docker.service
 ExecStart=/usr/bin/dockerd -H 0.0.0.0:2375
