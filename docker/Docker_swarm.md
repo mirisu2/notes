@@ -80,6 +80,7 @@ docker service update [OPTIONS] [NAME]
 #### Creating an overlay network:
 ```
 docker network create -d overlay [NAME]
+docker network create -d overlay --opt encrypted [NAME]
 ```
 #### Creating a service with an overlay network:
 ```
