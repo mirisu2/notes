@@ -77,3 +77,15 @@ docker service scale [NAME]=[REPLICAS]
 docker service update -h
 docker service update [OPTIONS] [NAME]
 ```
+#### Creating an overlay network:
+```
+docker network create -d overlay [NAME]
+```
+#### Creating a service with an overlay network:
+```
+docker service create -d --name [NAME] --network [NETWORK] -p [HOST_POST]:[CONTAINER_PORT] --replicas [REPLICAS] [IMAGES] [CMD]
+```
+#### Adding a service to a network:
+```
+docker service update --network-add [NETWORK] [SERVICE]
+```
