@@ -45,3 +45,35 @@ docker swarm leave #(выполняем на удаленной машине) п
 ```
 docker swarm join-token [worker|manager] #(выполняем на мастере)
 ```
+
+
+#### Creating a service
+```
+docker service create -d --name [name] -p [HOST_PORT]:[CONTAINER_PORT] --replicas [REPLICAS] [IMAGES] [CMD]
+docker service create -d --name nginx_service -p 8080:80 --replicas 2 nginx:latest
+```
+#### List services:
+```
+docker service ls
+```
+#### Inspecting a service:
+```
+docker service inspect [NAME]
+```
+#### Getting logs for a service:
+```
+docker service logs [NAME]
+```
+#### List all tasks of a service:
+```
+docker service ps [NAME]
+```
+#### Scaling a service up and down:
+```
+docker service scale [NAME]=[REPLICAS]
+```
+#### Updating a service:
+```
+docker service update -h
+docker service update [OPTIONS] [NAME]
+```
