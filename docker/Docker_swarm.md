@@ -77,7 +77,7 @@ docker service scale [NAME]=[REPLICAS]
 docker service update -h
 docker service update [OPTIONS] [NAME]
 ```
-#### Creating an overlay network:
+#### Creating an overlay [network](https://docs.docker.com/network/overlay/):
 ```
 docker network create -d overlay [NAME]
 docker network create -d overlay --opt encrypted [NAME]
