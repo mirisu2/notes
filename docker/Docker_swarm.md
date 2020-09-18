@@ -1,5 +1,9 @@
 ## https://docs.docker.com/engine/swarm/
 ```
+https://docs.docker.com/engine/security/trust/content_trust/
+export DOCKER_CONTENT_TRUST=1
+$ docker trust inspect
+
 user@ne:~$ docker swarm init --advertise-addr 192.168.0.1
 Swarm initialized: current node (izs4yqp39a6yepsfs0449z8zu) is now a manager.
 
