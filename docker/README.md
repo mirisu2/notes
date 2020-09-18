@@ -1,7 +1,5 @@
 ## Manage sensitive data with Docker secrets
-```
-When you add a secret to the swarm, Docker sends the secret to the swarm manager over a mutual TLS connection. The secret is stored in the Raft log, which is encrypted. The entire Raft log is replicated across the other managers, ensuring the same high availability guarantees for secrets as for the rest of the swarm management data.
-```
+```When you add a secret to the swarm, Docker sends the secret to the swarm manager over a mutual TLS connection. The secret is stored in the Raft log, which is encrypted. The entire Raft log is replicated across the other managers, ensuring the same high availability guarantees for secrets as for the rest of the swarm management data.```
 https://docs.docker.com/engine/swarm/secrets/
 
 [Command-line reference](https://docs.docker.com/engine/reference/commandline/docker/)
