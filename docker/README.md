@@ -1,3 +1,6 @@
+## Manage sensitive data with Docker secrets
+https://docs.docker.com/engine/swarm/secrets/
+
 [Command-line reference](https://docs.docker.com/engine/reference/commandline/docker/)
 #
 [Install Docker Engine on Debian 10.3.0-amd64](https://docs.docker.com/engine/install/debian/#install-from-a-package)
