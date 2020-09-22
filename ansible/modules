@@ -6,6 +6,9 @@ debug https://docs.ansible.com/ansible/latest/modules/debug_module.html
 vmware_guest https://docs.ansible.com/ansible/latest/modules/vmware_guest_module.html#vmware-guest-module
 hostname https://docs.ansible.com/ansible/latest/modules/hostname_module.html#hostname-module
 
+telnet https://docs.ansible.com/ansible/latest/modules/telnet_module.html
+Return Values https://docs.ansible.com/ansible/latest/reference_appendices/common_return_values.html#common-return-values
+
 stat https://docs.ansible.com/ansible/latest/modules/stat_module.html
 lineinfile https://docs.ansible.com/ansible/latest/modules/lineinfile_module.html#lineinfile-module
 replace https://docs.ansible.com/ansible/latest/modules/replace_module.html#replace-module
