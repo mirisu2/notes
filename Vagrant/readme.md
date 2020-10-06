@@ -15,3 +15,63 @@
 ```By default, Vagrant shares your project directory (the one containing the Vagrantfile) to the /vagrant directory in your guest machine.```
 ## Vagrant ENV:
 - VAGRANT_ALIAS_FILE [click me](https://www.vagrantup.com/docs/cli/aliases)
+- VAGRANT_DEFAULT_PROVIDER
+
+## VAGRANT CLI:
+```
+vagrant autocomplete install --bash
+sudo vagrant destroy --force && sudo vagrant up
+vagrant status
+vagrant ssh node1
+vagrant ssh node2
+
+sudo vagrant global-status
+sudo vagrant destroy d688e4a
+vagrant init hashicorp/bionic64
+vagrant up
+vagrant up --provider=docker|vmware_desktop|
+vagrant reload --provision
+vagrant reload
+vagrant suspend
+	vagrant up
+	*Suspending the virtual machine will stop it and save its current running state.
+vagrant halt
+	vagrant up
+	*Halting the virtual machine will gracefully shut down the guest operating system and power down the guest machine. 
+vagrant destroy
+
+vagrant snapshot
+	push
+	pop
+	save
+	restore
+	list
+	delete
+
+vagrant share
+	The share command initializes a Vagrant Share session, allowing you to share your Vagrant environment with anyone in the world, enabling 
+	collaboration directly in your Vagrant environment in almost any network environment.
+	https://www.vagrantup.com/docs/cli/share
+```
+## Vagrant box catalog [click me](https://app.vagrantup.com/boxes/search)
+```
+vagrant box add hashicorp/bionic64
+vagrant box list
+vagrant box remove hashicorp/bionic64
+vagrant box remove hashicorp/bionic64 --provider vmware_desktop
+vagrant box outdated --forced
+vagrant box prune
+	This command removes old versions of installed boxes. If the box is currently in use vagrant will ask for confirmation.
+	--dry-run
+	--provider NAME
+	--force [--keep-active-boxes]
+	--name NAME
+vagrant box remove NAME
+	This command removes a box from Vagrant that matches the given name.
+
+vagrant plugin list
+vagrant plugin install vagrant-vmware-desktop
+vagrant plugin install vagrant-share
+	https://learn.hashicorp.com/tutorials/vagrant/getting-started-share?in=vagrant/getting-started
+vagrant plugin uninstall vagrant-vmware-desktop
+```
