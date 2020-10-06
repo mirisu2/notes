@@ -13,3 +13,5 @@
 ```
 
 ```By default, Vagrant shares your project directory (the one containing the Vagrantfile) to the /vagrant directory in your guest machine.```
+## Vagrant ENV:
+- VAGRANT_ALIAS_FILE [click me](https://www.vagrantup.com/docs/cli/aliases)
