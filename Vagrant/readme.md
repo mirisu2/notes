@@ -1,6 +1,6 @@
-https://askubuntu.com/questions/900118/vboxdrv-sh-failed-modprobe-vboxdrv-failed-please-use-dmesg-to-find-out-why
-https://learn.hashicorp.com/tutorials/vagrant/getting-started-index?in=vagrant/getting-started
-https://www.vagrantup.com/docs/index
+[Resolving a problem](https://askubuntu.com/questions/900118/vboxdrv-sh-failed-modprobe-vboxdrv-failed-please-use-dmesg-to-find-out-why)
+[getting-started](https://learn.hashicorp.com/tutorials/vagrant/getting-started-index?in=vagrant/getting-started)
+[Docs](https://www.vagrantup.com/docs/index)
 ## Instalation
 ```
 1. download from https://www.vagrantup.com/downloads zip archive.
