@@ -64,3 +64,10 @@ sudo ln -s /home/vagrant/apache-maven-3.6.3/bin/mvn /usr/bin/mvn
 mvn -v
 ```
 `Much like a production environment and a staging environment, we recommend using the release repository for stable components in production and a snapshot repository for components still in the development phase.`
+
+```
+maven-central	proxy
+maven-public	group
+maven-releases	hosted
+maven-snapshots	hosted
+```
