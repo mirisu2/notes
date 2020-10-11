@@ -92,3 +92,5 @@ If you’re an administrator you’ll find it less cumbersome to order your prox
 designed for a development team.
 ```
 *It’s **important** to note that a group doesn’t store components. You can’t publish or deploy components directly to this repository type. Groups just aggregate content from other repositories. If you want to modify components in a group repository, publish those changes to a hosted repository included in the group.*
+
+*When adding members to your group, we **recommend** you order your hosted repositories at the top, above your proxies. In common snapshot scenarios, your team will develop internal, hosted components then upload each improvement to the repository manager. Each time a request for a version is made, its retrieval is faster if organized in sequential order.*
