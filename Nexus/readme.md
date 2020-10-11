@@ -57,6 +57,9 @@ https://maven.apache.org/download.cgi
 # Installing Apache Maven
 https://maven.apache.org/install.html
 
+# Add link
+sudo ln -s /home/vagrant/apache-maven-3.6.3/bin/mvn /usr/bin/mvn
+
 # Confirm 
 mvn -v
 ```
