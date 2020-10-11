@@ -84,4 +84,4 @@ Repository groups become necessary if your organization has multiple teams worki
 If you’re an administrator you’ll find it less cumbersome to order your proxy and hosted repositories into a group 
 designed for a development team.
 ```
-`It’s important to note that a group doesn’t store components. You can’t publish or deploy components directly to this repository type. Groups just aggregate content from other repositories. If you want to modify components in a group repository, publish those changes to a hosted repository included in the group.`
+*It’s **important** to note that a group doesn’t store components. You can’t publish or deploy components directly to this repository type. Groups just aggregate content from other repositories. If you want to modify components in a group repository, publish those changes to a hosted repository included in the group.*
