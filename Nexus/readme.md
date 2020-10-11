@@ -79,3 +79,6 @@ A repository group is:
 - A combined repository of locally published and remotely cached components.
 - A unique endpoint that users can access without having to retrieve components from hosted and proxy repositories.
 ```
+```
+Repository groups become necessary if your organization has multiple teams working on multiple projects. If you’re an administrator you’ll find it less cumbersome to order your proxy and hosted repositories into a group designed for a development team.
+```
