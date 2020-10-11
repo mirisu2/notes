@@ -49,3 +49,14 @@ on a Unix-like platform like Linux use:*
 ```
 http://localhost:8081/
 ```
+## Get Maven
+```
+# Downloading Apache Maven
+https://maven.apache.org/download.cgi
+
+# Installing Apache Maven
+https://maven.apache.org/install.html
+
+# Confirm 
+mvn -v
+```
