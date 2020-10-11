@@ -72,6 +72,11 @@ maven-central	proxy
 maven-public	group
 maven-releases	hosted
 maven-snapshots	hosted
+
+- The remote proxy for the Central Repository
+- Maven-snapshots, a repository for you to host multiple versions of a project in development
+- Maven-releases, a repository for you to host a stable project set for production
+
 ```
 ```
 A repository group is:
