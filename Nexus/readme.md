@@ -74,8 +74,8 @@ maven-snapshots	hosted
 ```
 A repository group is:
 
-Its own access point, separate from proxy and hosted repositories.
-Created by adding repositories as members of a ordered list.
-A combined repository of locally published and remotely cached components.
-A unique endpoint that users can access without having to retrieve components from hosted and proxy repositories.
+- Its own access point, separate from proxy and hosted repositories.
+- Created by adding repositories as members of a ordered list.
+- A combined repository of locally published and remotely cached components.
+- A unique endpoint that users can access without having to retrieve components from hosted and proxy repositories.
 ```
