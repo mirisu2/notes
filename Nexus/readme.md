@@ -33,9 +33,9 @@ WantedBy=multi-user.target
 ```
 *Nexus Repository Manager **requires** a Java 8 Runtime Environment (JRE).*
 ```
-Additionally, we strongly recommend to avoid using NFS, Amazon EFS, CIFS and SMB for anything other than blob storage in Nexus 
-Repository 3, especially in large installations and high availability setups, as this can cause severe performance degradation.
-If NFS is used for blob storage we recommend to only use NFSv4; NFSv3 is known to provide inadequate performance. 
+Additionally, we strongly recommend to avoid using NFS, Amazon EFS, CIFS and SMB for anything other than blob storage 
+in Nexus Repository 3, especially in large installations and high availability setups, as this can cause severe performance 
+degradation. If NFS is used for blob storage we recommend to only use NFSv4; NFSv3 is known to provide inadequate performance. 
 ```
 *The downloaded GZip’d TAR archive can be extracted with the command tar xvzf. For production it is not recommend that nexus be run from a users
 home directory, a common practice is to use /opt. Running the appTo start the repository manager from application directory in the bin folder 
@@ -80,5 +80,7 @@ A repository group is:
 - A unique endpoint that users can access without having to retrieve components from hosted and proxy repositories.
 ```
 ```
-Repository groups become necessary if your organization has multiple teams working on multiple projects. If you’re an administrator you’ll find it less cumbersome to order your proxy and hosted repositories into a group designed for a development team.
+Repository groups become necessary if your organization has multiple teams working on multiple projects. 
+If you’re an administrator you’ll find it less cumbersome to order your proxy and hosted repositories into a group 
+designed for a development team.
 ```
