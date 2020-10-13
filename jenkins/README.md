@@ -33,6 +33,7 @@ sudo apt-get install jenkins
 * Periodic Backup
 * Ansible
 * Locale
+* Nexus Platform
 * Green Balls
 
 ## Jenkins env (чтобы не указывать в cli -auth) .bashrc
