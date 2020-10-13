@@ -64,6 +64,15 @@ sudo ln -s /home/vagrant/apache-maven-3.6.3/bin/mvn /usr/bin/mvn
 mvn -v
 
 mvn archetype:generate
+
+Основные этапы (phase) подциклов:
+ - подготовка ресурсов - (*-resources)
+ - валидация -  mvn validate
+ - компиляция - mvn compile
+ - тестирование - mvn test
+ - упаковка JAR\WAR\EAR- mvn package
+ - установка (в репозиторий) - mvn install
+ - деплой - mvn deploy
 ```
 `Much like a production environment and a staging environment, we recommend using the release repository for stable components in production and a snapshot repository for components still in the development phase.`
 
