@@ -55,19 +55,35 @@ pipeline {
 		TELEGRAM_ID      = credentials('TELEGRAM_ID')
         	X_NOTIFY_API_Key = credentials('X_NOTIFY_API_Key')
 	}
-	*tools {}
+	*tools {
+		maven 'apache-maven-3.0.1'
+	}
 	*options {
-		{
+		timestamps()
+		timeout(time: 1, unit: 'HOURS')
 		disableConcurrentBuilds()
 		buildDiscarder(logRotator(numToKeepStr: ''))
-		}
 	}
-	*triggers {}
+	*triggers {
+		cron('H */4 * * 1-5')
+		pollSCM('H */4 * * 1-5')
+	}
 	*parameters {}
 	*libraries {}
 	stages {
 		stage('Build...') {
-			*when {}
+			*when {
+				expression { BRANCH_NAME ==~ /(production|staging)/ }
+				environment name: 'DEPLOY_TO', value: 'production'
+				allOf {
+				    branch 'production'
+				    environment name: 'DEPLOY_TO', value: 'production'
+				}
+				anyOf {
+				    environment name: 'DEPLOY_TO', value: 'production'
+				    environment name: 'DEPLOY_TO', value: 'staging'
+				}				
+			}
 			*agent {}
 			*environment {}
 			*tools {}
