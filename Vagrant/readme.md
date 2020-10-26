@@ -75,3 +75,19 @@ vagrant plugin install vagrant-share
 	https://learn.hashicorp.com/tutorials/vagrant/getting-started-share?in=vagrant/getting-started
 vagrant plugin uninstall vagrant-vmware-desktop
 ```
+
+When you run any vagrant command, Vagrant climbs up the directory tree looking for the first Vagrantfile it can find, starting first in 
+the current directory. So if you run vagrant in /home/mitchellh/projects/foo, it will search the following paths in order for a Vagrantfile, 
+until it finds one:
+```
+/home/mitchellh/projects/foo/Vagrantfile
+/home/mitchellh/projects/Vagrantfile
+/home/mitchellh/Vagrantfile
+/home/Vagrantfile
+/Vagrantfile
+```
+
+`You can change the starting directory where Vagrant looks for a Vagrantfile by setting the VAGRANT_CWD environmental variable to some other path.`
+
+
+
