@@ -76,8 +76,8 @@ vagrant plugin install vagrant-share
 vagrant plugin uninstall vagrant-vmware-desktop
 ```
 
-When you run any vagrant command, Vagrant climbs up the directory tree looking for the first Vagrantfile it can find, starting first in 
-the current directory. So if you run vagrant in /home/mitchellh/projects/foo, it will search the following paths in order for a Vagrantfile, 
+When you run any `vagrant` command, Vagrant climbs up the directory tree looking for the first Vagrantfile it can find, starting first in 
+the current directory. So if you run `vagrant` in `/home/mitchellh/projects/foo`, it will search the following paths in order for a Vagrantfile, 
 until it finds one:
 ```
 /home/mitchellh/projects/foo/Vagrantfile
