@@ -1,4 +1,4 @@
-#### Use environment variables or labels with logging drivers
+#### Use environment variables or labels with [logging drivers](https://docs.docker.com/config/containers/logging/configure/)
 Some logging drivers add the value of a container’s `--env|-e` or `--label` flags to the container’s logs. This example starts a container using the Docker daemon’s default logging driver (let’s assume json-file) but sets the environment variable `os=ubuntu`.
 ```
 $ docker run -dit --label production_status=testing -e os=ubuntu alpine sh
