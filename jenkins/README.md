@@ -35,6 +35,7 @@ sudo apt-get install jenkins
 * Locale
 * Nexus Platform
 * Green Balls
+* Locale (set en_US)
 
 ## Jenkins env (чтобы не указывать в cli -auth) .bashrc
 ```
