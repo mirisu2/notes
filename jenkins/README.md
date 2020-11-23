@@ -36,6 +36,7 @@ sudo apt-get install jenkins
 * Nexus Platform
 * Green Balls
 * Locale (set en_US)
+* Generic Webhook Trigger Plugin (Github, Gitlab...)
 
 ## Jenkins env (чтобы не указывать в cli -auth) .bashrc
 ```
