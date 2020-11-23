@@ -32,7 +32,7 @@ sudo apt-get install jenkins
 ## Plugins
 * Periodic Backup
 * Ansible
-* Locale
+* Convert To Pipeline # https://plugins.jenkins.io/convert-to-pipeline/
 * Nexus Platform
 * Green Balls
 * Locale (set en_US)
