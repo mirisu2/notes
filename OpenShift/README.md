@@ -250,3 +250,7 @@ The configuration file for HAProxy is in the pod at /var/lib/haproxy/
 conf/haproxy.config. This configuration file is maintained by OpenShift. Any time an
 application is deployed, updated, or deleted, OpenShift updates this configuration
 and has the HAProxy process reload it.
+
+*OpenShift deploys SkyDNS (https://github.com/skynetservices/skydns) when the cluster is deployed and makes it available on the pod
+network. SkyDNS is a DNS service that uses etcd, the primary Kubernetes database, to
+store DNS records.*
