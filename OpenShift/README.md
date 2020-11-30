@@ -168,5 +168,6 @@ A build config contains all the information needed to build an application using
  - Name of the builder image to use
  - Name of the application container image that’s created
  - Events that can trigger a new build to occur
+ 
 The build config is used to track what’s required to build your application and to trigger the creation of the application’s container image.
 After the build config does its job, it `triggers the deployment config` that’s created for your newly created application.
