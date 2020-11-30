@@ -203,3 +203,10 @@ available. These sorts of trigger events are monitored by `image streams` in Ope
 Image streams are used to automate actions in OpenShift. They consist of links to one
 or more container images. Using image streams, you can monitor applications and
 trigger new deployments when their components are updated.
+
+*Each service gets an IP address that’s only routable from within the OpenShift cluster.*
+###### Services
+Services provide a consistent gateway into your application deployment. But the IP
+address of a service is available only in your OpenShift cluster. To connect users to your
+applications and make DNS work properly, you need one more application component.
+Next, you’ll create a `route` to expose app-cli externally from your OpenShift cluster.
