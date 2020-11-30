@@ -219,4 +219,8 @@ address range you want to use for the pod network.
 `A VXLAN is a protocol that acts as an overlay network between the nodes in your
 OpenShift cluster. An overlay network is a software-defined network that’s deployed
 on top of another network. The VXLANs used in OpenShift are deployed on top of the
-networking configuration of the hosts.`
+networking configuration of the hosts. To communicate securely between pods, the VXLAN encapsulates pod network traffic
+in an additional layer of network information so it can be delivered to the proper pod
+on the proper server by IP address. The overlay network is the pod network in your
+OpenShift cluster. The VXLAN interfaces on each node provide access to and from
+that network.`
