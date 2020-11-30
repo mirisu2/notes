@@ -186,3 +186,20 @@ changes to the deployment or changes to the container image trigger an automatic
 
 `The number of replicas specified in a deployment config is passed into a Kubernetes object called a replication controller. This is a special type of Kubernetes pod that allows
 for multiple replicas—copies of the application pod—to be kept running at all times.`
+
+*Each deployment for an application is monitored and available to the deployment config component using deployments.*
+
+###### DEPLOYMENTS
+Each time a new version of an application is created by its build config, a new deployment is created and tracked by the deployment config. A deployment represents a
+unique version of an application. Each deployment references a version of the application image that was created, and creates the replication controller to create and
+maintain the pods to serve the application.
+
+###### MANAGING UPGRADE METHODS
+The default application-upgrade method in OpenShift is to perform a `rolling upgrade`. Rolling upgrades create new versions of an application, allowing new connections to
+the application to access only the new version. As traffic increases to the new deployment, the pods for the old deployment are removed from the system.
+New application deployments can be automatically triggered by events such as configuration changes to your application, or a new version of a container image being
+available. These sorts of trigger events are monitored by `image streams` in OpenShift.
+###### Image streams
+Image streams are used to automate actions in OpenShift. They consist of links to one
+or more container images. Using image streams, you can monitor applications and
+trigger new deployments when their components are updated.
