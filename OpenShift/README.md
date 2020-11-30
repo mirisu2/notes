@@ -135,3 +135,38 @@ openshift_master_cluster_method=native
 openshift_master_default_subdomain=apps.home.lab
 openshift_public_hostname=oc-m-1.home.lab
 ```
+###### Install oc cli
+```
+curl -L https://github.com/openshift/origin/releases/download/v3.11.0/openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit.tar.gz -o openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit.tar.gz
+
+tar -xzf openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit.tar.gz
+
+mv openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit openshift3.11
+
+cd openshift3.11/
+chmod u+x oc
+chmod u+x kubectl
+./oc version
+sudo ln -s $(pwd)/oc /usr/bin/oc
+
+oc login -u admin -p admin https://oc-m-1.home.lab:8443
+
+arty@ntp:~/openshift3.11$ oc new-project python-hello-world --display-name='Python hello world app'
+Now using project "python-hello-world" on server "https://oc-m-1.home.lab:8443".
+
+You can add applications to this project with the 'new-app' command. For example, try:
+
+    oc new-app centos/ruby-25-centos7~https://github.com/sclorg/ruby-ex.git
+
+to build a new example application in Ruby.
+arty@ntp:~/openshift3.11$ oc project
+Using project "python-hello-world" on server "https://oc-m-1.home.lab:8443".
+```
+###### Build configs
+A build config contains all the information needed to build an application using its source code. This includes all the information required to build the application container image:
+ - URL for the application source code
+ - Name of the builder image to use
+ - Name of the application container image that’s created
+ - Events that can trigger a new build to occur
+The build config is used to track what’s required to build your application and to trigger the creation of the application’s container image.
+After the build config does its job, it `triggers the deployment config` that’s created for your newly created application.
