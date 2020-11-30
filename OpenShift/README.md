@@ -256,3 +256,11 @@ and has the HAProxy process reload it.
 OpenShift deploys SkyDNS (https://github.com/skynetservices/skydns) when the cluster is deployed and makes it available on the pod
 network. SkyDNS is a DNS service that uses etcd, the primary Kubernetes database, to
 store DNS records.
+
+#### Isolating traffice with the ovs-multitenant plugin
+When the `ovs-multitenant` plugin is enabled, each project is assigned a VNID. The
+VNID for each project is maintained in the etcd database on the OpenShift master
+node. When a pod is created, its linked veth interface is associated with its project’s
+VNID, and OpenFlow rules are created to make sure it can communicate only with
+pods in the same project.
+
