@@ -224,3 +224,8 @@ in an additional layer of network information so it can be delivered to the prop
 on the proper server by IP address. The overlay network is the pod network in your
 OpenShift cluster. The VXLAN interfaces on each node provide access to and from
 that network.`
+
+*A TUN interface (short for network TUNnel) is a virtual network device that mimics
+the functionality of a physical interface. In the case of OpenShift, the tun0 interface
+acts as the default gateway on each node for the pod network. Because it’s a virtual
+device and not a physical one, it can be used to route traffic on and off the nonroutable pod network.*
