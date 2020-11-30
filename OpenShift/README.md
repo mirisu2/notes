@@ -241,3 +241,6 @@ device and not a physical one, it can be used to route traffic on and off the no
 11:tun0:
 18:vethd43cac2c@if3:
 ```
+*To get network traffic in and out of the container, the eth0 interface in
+the container is linked in the Linux kernel to a corresponding veth interface in the
+host’s default network namespace.*
