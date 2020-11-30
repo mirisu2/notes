@@ -264,3 +264,8 @@ node. When a pod is created, its linked veth interface is associated with its pr
 VNID, and OpenFlow rules are created to make sure it can communicate only with
 pods in the same project.
 
+`NOTE The router and registry pods in the default project are assigned VNID 0.
+This is a special VNID that can communicate with all other VNIDs on a system.
+If a pod needs to communicate with a pod on another host, the VNID is
+attached to each packet on the network as part of the VXLAN encapsulation
+process`
