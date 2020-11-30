@@ -171,3 +171,14 @@ A build config contains all the information needed to build an application using
  
 The build config is used to track what’s required to build your application and to trigger the creation of the application’s container image.
 After the build config does its job, it `triggers the deployment config` that’s created for your newly created application.
+
+###### Deployment configs
+The job of `deploying and upgrading the application` is handled by the deployment config component.
+- Deployment configs track several pieces of information about an application:
+- Currently deployed version of the application.
+- Number of replicas to maintain for the application.
+- Trigger events that can trigger a redeployment. By default, configuration
+changes to the deployment or changes to the container image trigger an automatic application redeployment
+- Upgrade strategy. app-cli uses the default rolling-upgrade strategy.
+- Application deployments.
+
