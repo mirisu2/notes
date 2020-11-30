@@ -229,3 +229,15 @@ that network.`
 the functionality of a physical interface. In the case of OpenShift, the tun0 interface
 acts as the default gateway on each node for the pod network. Because it’s a virtual
 device and not a physical one, it can be used to route traffic on and off the nonroutable pod network.*
+
+```
+[root@oc-n-1 ~]# ip a | egrep '^[0-9].*:' | awk '{ print $1 $2}'
+1:lo:
+2:ens192:
+3:docker0:
+4:ovs-system:
+9:br0:
+10:vxlan_sys_4789:
+11:tun0:
+18:vethd43cac2c@if3:
+```
