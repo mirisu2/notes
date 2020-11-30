@@ -182,3 +182,7 @@ changes to the deployment or changes to the container image trigger an automatic
 - Upgrade strategy. app-cli uses the default rolling-upgrade strategy.
 - Application deployments.
 
+*A key feature of applications running in OpenShift is that they’re horizontally scalable. This concept is represented in the deployment config by the number of replicas.*
+
+`The number of replicas specified in a deployment config is passed into a Kubernetes object called a replication controller. This is a special type of Kubernetes pod that allows
+for multiple replicas—copies of the application pod—to be kept running at all times.`
