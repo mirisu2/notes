@@ -269,3 +269,10 @@ This is a special VNID that can communicate with all other VNIDs on a system.
 If a pod needs to communicate with a pod on another host, the VNID is
 attached to each packet on the network as part of the VXLAN encapsulation
 process`
+
+*With the multitenant plugin enabled, if a pod needs to communicate with a pod in
+another project, the request must be routed off the pod network and connect to the
+desired application through its external route like any other external request. This
+isn’t always the most efficient architecture. The OpenShift SDN’s `ovs-networkpolicy`
+plugin provides more fine-grained control over how applications communicate
+across projects.*
