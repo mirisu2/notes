@@ -210,3 +210,7 @@ Services provide a consistent gateway into your application deployment. But the 
 address of a service is available only in your OpenShift cluster. To connect users to your
 applications and make DNS work properly, you need one more application component.
 Next, you’ll create a `route` to expose app-cli externally from your OpenShift cluster.
+#### osm_cluster_network_cidr 
+When you configure the installation inventory file
+before deploying OpenShift, set the osm_cluster_network_cidr variable to the IP
+address range you want to use for the pod network.
