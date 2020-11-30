@@ -215,3 +215,8 @@ When you configure the installation inventory file
 before deploying OpenShift, set the osm_cluster_network_cidr variable to the IP
 address range you want to use for the pod network.
 *Be careful when you select the IP range for the pod network—once you deploy OpenShift, it’s all but impossible to change it*
+
+`A VXLAN is a protocol that acts as an overlay network between the nodes in your
+OpenShift cluster. An overlay network is a software-defined network that’s deployed
+on top of another network. The VXLANs used in OpenShift are deployed on top of the
+networking configuration of the hosts.`
