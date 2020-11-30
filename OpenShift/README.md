@@ -244,3 +244,9 @@ device and not a physical one, it can be used to route traffic on and off the no
 *To get network traffic in and out of the container, the eth0 interface in
 the container is linked in the Linux kernel to a corresponding veth interface in the
 host’s default network namespace.*
+
+#### How HAProxy gets requests to the correct pods
+The configuration file for HAProxy is in the pod at /var/lib/haproxy/
+conf/haproxy.config. This configuration file is maintained by OpenShift. Any time an
+application is deployed, updated, or deleted, OpenShift updates this configuration
+and has the HAProxy process reload it.
