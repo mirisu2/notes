@@ -89,5 +89,61 @@ until it finds one:
 
 `You can change the starting directory where Vagrant looks for a Vagrantfile by setting the VAGRANT_CWD environmental variable to some other path.`
 
+#### from book
+```
 
+https://atlas.hashicorp.com/
+https://atlas.hashicorp.com/boxes/search
+export VAGRANT_HOME=/some/shared/directory #~/.vagrant.d
+VAGRANT_FORCE_COLOR
+VAGRANT_LOG # "debug," "info," "warn," and "error." 
+VAGRANT_VAGRANTFILE # Vargantfile
+VAGRANTFILE_API_VERSION = "2"
+
+$ vagrant status
+$ vagrant global-status
+$ vagrant up
+$ vagrant halt
+$ vagrant suspend
+$ vagrant destroy
+$ vagrant reload
+
+vagrant init -m ubuntu/trusty32
+puppetlabs/centos-7.0-64-nocm
+hashicorp/precise64
+ubuntu/trusty32
+chef/centos-6.5
+
+VAGRANTFILE_API_VERSION = "2"
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = "ubuntu/trusty32"
+end
+
+Vagrant.configure(2) do |config|
+  config.vm.box = "http://boxes.gajdaw.pl/sinatra/sinatra-v1.0.0.box"
+  config.vm.network :forwarded_port, guest: 4567, host: 45670, host_ip: "127.0.0.1"
+end
+
+config.vm.box = "/net/drive/mounted/first-box-jekyll.box"
+
+
+config.vm.synced_folder [HOST-PATH], [GUEST-PATH]
+config.vm.synced_folder "/dir/on/host/Mac/or/Linux", "/dir/on/guest/ubuntu"
+
+ssh-keygen -t rsa -C johnny@example.net -f johhny
+config.ssh.private_key_path = "/path/to/the/key/johnny"
+vagrant reload
+
+$ vagrant package --output first-box-jekyll.box
+* When run without any parameters, the command creates a file named package.box
+$ vagrant box repackage first-box-jekyll
+$ vagrant box help
+$ vagrant package help
+vagrant box add first-box-jekyll first-box-jekyll.box
+vagrant box list
+
+$ vagrant up --provision
+$ vagrant up --no-provision
+$ vagrant up --provision-with x, y, z
+```
 
