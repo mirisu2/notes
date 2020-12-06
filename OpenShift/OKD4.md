@@ -22,14 +22,10 @@ release image quay.io/openshift-release-dev/ocp-release@sha256:c7e8f18e811635670
 ```
 # wget --no-check-certificate https://vcenter.home.lab/certs/download.zip
 # unzip download.zip
-# mv certs/lin/* /usr/local/share/ca-certificates/
-# cd /usr/local/share/ca-certificates/
+# mv certs/win/* /usr/local/share/ca-certificates/
 ```
 > :exclamation: The result is a .certs folder that contains two types of files. Files with a number extension (.0, .1, and so on) are root certificates. Change the extension to .crt. Files with a extension that starts with an r (.r0,. r1, and so on) are CRL files associated with a certificate. Change the extension to .crl.
 ```
-# mv e20e602b.0 e20e602b.crt
-# mv e20e602b.r0 e20e602b.crl
-
 # update-ca-certificates
 Updating certificates in /etc/ssl/certs...
 1 added, 0 removed; done.
