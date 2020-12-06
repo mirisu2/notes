@@ -1,3 +1,4 @@
+[READ THIS](https://docs.openshift.com/container-platform/4.3/installing/installing_vsphere/installing-vsphere.html#installation-requirements-user-infra_installing-vsphere)
 ## Pre-Requisites
 ```
 apt-get install curl git mercurial make binutils bison gcc build-essential software-properties-common jq
@@ -97,6 +98,7 @@ platform:
 pullSecret: YOUR_PULL_SECRET
 sshKey: YOUR_SSH_KEY
 ```
+> :warning: перед запуском следующей команды, сделайте бэкап install-config.yaml файла. он удалится!
 2. Run `openshift-install create ignition-configs`
 > создается несколько файлов. надо [взять](https://github.com/openshift/okd/blob/master/Guides/UPI/vSphere_terraform/terraform.tfvars.example) **terraform.tfvars.example** и заполнить его
 ```
@@ -169,3 +171,9 @@ control_plane_macs = ["00:1c:14:00:00:11", "00:1c:14:00:00:12", "00:1c:14:00:00:
 compute_macs = ["00:1c:14:00:00:41", "00:1c:14:00:00:42", "00:1c:14:00:00:43"]
 ```
 > установил nginx, создал папку **ignition** в **/var/www/html/** и положил туда созданный файл **bootstrap.ign**
+
+#### Required machines
+The smallest OpenShift Container Platform clusters require the following hosts:
+- One temporary bootstrap machine
+- Three control plane, or master, machines
+- At least two compute machines, which are also known as worker machines
