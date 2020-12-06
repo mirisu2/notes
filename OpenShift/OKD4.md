@@ -58,3 +58,25 @@ INFO Obtaining RHCOS image file from 'https://releases-art-rhcos.svc.ci.openshif
 INFO Creating infrastructure resources...
 ...
 ```
+
+## Optional
+```
+john@ws:~$ openshift-install create install-config --dir third
+? SSH Public Key /home/john/.ssh/id_rsa.pub
+? Platform vsphere
+? vCenter vcenter.home.host
+? Username administrator@vsphere.local
+? Password [? for help] ************
+INFO Connecting to vCenter vcenter.home.host
+INFO Defaulting to only available datacenter: Datacenter1
+INFO Defaulting to only available cluster: Cluster1
+? Default Datastore datastore1_200
+INFO Defaulting to only available network: VM Network
+? Virtual IP Address for API 172.16.16.140
+? Virtual IP Address for Ingress 172.16.16.141
+? Base Domain home.host
+? Cluster Name oc
+? Pull Secret [? for help] **************************************
+INFO Install-Config created in: third
+```
+Look at the third/ dir!
