@@ -1,0 +1,24 @@
+root@orc:/home/toor# cat /etc/default/isc-dhcp-server
+#DHCPDv4_CONF=/etc/dhcp/dhcpd.conf
+#DHCPDv6_CONF=/etc/dhcp/dhcpd6.conf
+
+#DHCPDv4_PID=/var/run/dhcpd.pid
+#DHCPDv6_PID=/var/run/dhcpd6.pid
+
+INTERFACESv4="ens192"
+#INTERFACESv6=""
+
+root@orc:/home/toor# cat /etc/dhcp/dhcpd.conf
+ddns-update-style none;
+authoritative;
+log-facility local7;
+
+subnet 192.168.13.0 netmask 255.255.255.0 {
+  range 192.168.13.75 192.168.13.100;
+  option domain-name-servers 192.168.13.72;
+  option domain-name "home.lab";
+  option routers 192.168.13.1;
+  option broadcast-address 192.168.13.255;
+  default-lease-time 600;
+  max-lease-time 7200;
+}
