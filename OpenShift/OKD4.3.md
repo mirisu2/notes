@@ -26,6 +26,7 @@ export GOPATH=/home/john/go
 mkdir -p $GOPATH/src/github.com/openshift
 cd $GOPATH/src/github.com/openshift
 
+cd installer/
 git clone https://github.com/openshift/installer.git
 git branch -a
 * master
