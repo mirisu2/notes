@@ -1,4 +1,10 @@
 [READ THIS](https://docs.openshift.com/container-platform/4.3/installing/installing_vsphere/installing-vsphere.html#installation-requirements-user-infra_installing-vsphere)
+## Go install
+```
+wget https://golang.org/dl/go1.15.6.linux-amd64.tar.gz
+tar -C /usr/local -xzf go1.15.6.linux-amd64.tar.gz
+export PATH=$PATH:/usr/local/go/bin
+```
 ## Pre-Requisites
 ```
 apt-get install curl git mercurial make binutils bison gcc build-essential software-properties-common jq
