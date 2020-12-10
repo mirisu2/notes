@@ -23,7 +23,7 @@ gvm install go1.15.6
 gvm use go1.15.6
 
 mkdir $HOME/go
-export GOPATH=/home/john/go
+export GOPATH=$HOME/go
 ```
 ## GIT
 > Clone this repository to `src/github.com/openshift/installer` in your [GOPATH](https://golang.org/cmd/go/#hdr-GOPATH_environment_variable).
