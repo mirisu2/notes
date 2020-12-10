@@ -1,0 +1,106 @@
+root@ns:/etc/bind/zones# ls -la
+total 20
+drwxr-sr-x 2 root bind 4096 Dec  2 21:51 .
+drwxr-sr-x 4 root bind 4096 Dec  2 21:50 ..
+-rw-r--r-- 1 root bind  452 Nov 29 18:40 db.172.16.16
+-rw-r--r-- 1 root bind  195 Dec  2 21:51 db.h744.host
+-rw-r--r-- 1 root bind  863 Dec  2 11:54 db.home.lab
+root@ns:/etc/bind/zones# cat db.172.16.16
+$TTL 1h
+16.16.172.in-addr.arpa. IN      SOA     ns.home.lab.    noc.home.lab. (2019031405 3h 1h 2w 1h)
+      IN    NS    ns.home.lab.
+0     IN PTR subnet0x24.home.lab.
+16    IN PTR ns.home.lab.
+
+100   IN PTR oc-m-1.home.lab.
+101   IN PTR oc-n-1.home.lab.
+102   IN PTR oc-n-2.home.lab.
+
+111   IN PTR ntp.home.lab.
+112   IN PTR eve-ng.home.lab.
+35    IN PTR vcenter.home.lab.
+200   IN PTR esxi-1.home.lab.
+202   IN PTR esxi-2.home.lab.
+203   IN PTR esxi-3.home.lab.
+root@ns:/etc/bind/zones# cat db.h744.host
+$TTL 1h
+h744.host.      IN      SOA     ns.h744.host.   noc.h744.home. (2020113090 3h 1h 2w 1h)
+                IN      NS      ns.h744.home.
+                IN      A       172.16.16.16
+ns      IN A 172.16.16.16
+ntp     IN CNAME ns
+vcenter IN A 172.16.16.40
+
+root@ns:/etc/bind/zones# cat db.home.lab
+$TTL 1h
+home.lab.       IN      SOA     ns.home.lab.    noc.home.lab. (2020113089 3h 1h 2w 1h)
+                IN      NS      ns.home.lab.
+                IN      A       172.16.16.16
+ns      IN A 172.16.16.16
+ntp     IN CNAME ns
+vcenter IN A 172.16.16.35
+
+lb      IN A 172.16.16.105
+
+oc-m-1  IN A 172.16.16.100
+oc-n-1  IN A 172.16.16.101
+oc-n-2  IN A 172.16.16.102
+oc-i-1  IN CNAME lb
+
+apps    IN CNAME lb
+*.apps  IN CNAME lb
+
+apps-int    IN CNAME lb
+*.apps-int  IN CNAME lb
+etcd-1      IN A 172.16.16.106
+etcd-2      IN A 172.16.16.107
+etcd-3      IN A 172.16.16.108
+
+# _service._proto.name. TTL class SRV priority weight port target
+_etcd-server-ssl._tcp 86400 IN SRV 0 10 2380 etcd-1
+_etcd-server-ssl._tcp 86400 IN SRV 0 10 2380 etcd-2
+_etcd-server-ssl._tcp 86400 IN SRV 0 10 2380 etcd-3
+
+
+eve-ng  IN A 172.16.16.112
+esxi-1  IN A 172.16.16.200
+esxi-2  IN A 172.16.16.202
+esxi-3  IN A 172.16.16.203
+nsxt    IN A 172.16.16.254
+root@ns:/etc/bind/zones# cat ../named.conf
+acl "trusted" {
+    172.16.16.0/24; // Home
+};
+options {
+    directory "/var/cache/bind";
+    statistics-file "/var/log/named/named.stats";
+    version none;
+    recursion yes;
+    allow-recursion { trusted; };
+    allow-query-cache { trusted; };
+
+    dnssec-validation auto;
+
+    auth-nxdomain no;
+    listen-on-v6 { any; };
+    listen-on { any; };
+    allow-transfer { none; };
+
+    rate-limit {
+        responses-per-second 70;
+            window 5;
+    };
+
+        // forwarders {
+        //      0.0.0.0;
+        // };
+
+};
+
+zone "." { type hint; file "/etc/bind/db.root"; };
+zone "localhost" { type master; file "/etc/bind/db.local"; };
+zone "127.in-addr.arpa" { type master; file "/etc/bind/db.127"; };
+zone "0.in-addr.arpa" { type master; file "/etc/bind/db.0"; };
+zone "255.in-addr.arpa" { type master; file "/etc/bind/db.255"; };
+
+include "/etc/bind/zones.conf";
