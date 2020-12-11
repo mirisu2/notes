@@ -1,0 +1,20 @@
+[john@bastion ~]$ cat ~/.ssh/config
+# Fix rights
+# chmod 600 ~/.ssh/config
+# chown $USER ~/.ssh/config
+
+Host *
+      ForwardAgent no
+      ForwardX11 no
+      ForwardX11Trusted yes
+      User john
+      Port 22
+      Protocol 2
+
+Host ns1
+     HostName 192.168.0.1
+     IdentityFile ~/.ssh/id_rsa
+
+Host ns2
+     HostName 192.168.0.2
+     IdentityFile ~/.ssh/id_rsa
