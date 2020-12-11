@@ -1,0 +1,27 @@
+apt install -y wget; wget https://golang.org/dl/go1.15.6.linux-amd64.tar.gz; tar -C /usr/local -xzf go1.15.6.linux-amd64.tar.gz; export PATH=$PATH:/usr/local/go/bin; go version;
+mkdir $HOME/go; export GOPATH=$HOME/go; mkdir -p $GOPATH/src/github.com/openshift; cd $GOPATH/src/github.com/openshift; git clone https://github.com/openshift/installer.git; cd installer; git branch -a; git checkout remotes/origin/release-4.5; export PATH=$PATH:/usr/local/go/bin;
+
+hack/build.sh
+we get error:
+go: github.com/openshift/library-go@v0.0.0-20200324092245-db2a8546af81 requires
+        bitbucket.org/ww/goautoneg@v0.0.0-20120707110453-75cd24fc2f2c: reading https://api.bitbucket.org/2.0/repositories/ww/goautoneg?fields=scm: 404 Not Found
+
+grep -R 'bitbucket.org' ~/go/*
+vim.tiny /home/toor/go/pkg/mod/cache/download/github.com/openshift/library-go/@v/v0.0.0-20200324092245-db2a8546af81.mod
+delete all bitbucket
+
+hack/build.sh
+now we get another error:
+verifying github.com/openshift/library-go@v0.0.0-20200324092245-db2a8546af81/go.mod: checksum mismatch
+        downloaded: h1:eyo0ccXVNRWhUnQlpGC7kiyedUdvwd5acrcQ6oLq9u0=
+        go.sum:     h1:Qc5duoXHzAKyUfA0REIlG/rdfWzknOpp9SiDiyg5Y7A=
+
+vim.tiny go.sum
+search /Qc5duoXHzA and replace it with h1:eyo0ccXVNRWhUnQlpGC7kiyedUdvwd5acrcQ6oLq9u0=
+
+hack/build.sh
+now we will get our build
+$ bin/openshift-install version
+bin/openshift-install unreleased-master-3187-gb42b0475e12c6e5b8536b3aa53b5db3f6970e1de-dirty
+built from commit b42b0475e12c6e5b8536b3aa53b5db3f6970e1de
+release image registry.svc.ci.openshift.org/origin/release:4.5
