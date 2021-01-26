@@ -1,3 +1,7 @@
+```
+ansible all -i kubernetes_inventory.yml -m shell -a 'timedatectl set-time 2021-01-26 15:30:00'
+ansible all -i kubernetes_inventory.yml -m shell -a 'timedatectl set-time 15:30:00'
+```
 #### Проверка форматирования YAML
 ```
 pip3 install yamllint
