@@ -1,4 +1,12 @@
 man keepalived.conf
+The keyword enable_script_security should be added to the global_defs section of the configuration to enable script security. 
+This means that keepalived will make sure that no no-root user can modify the scripts, which would mean that a non-root 
+user could run programs with root privileges.
+
+It is also a good idea to specify script_user USERNAME to set the default user which should run scripts (avoiding user root if possible). 
+There is also the option to configure username (and groupname) for each script, if you want different scripts executed with the 
+privileges of different users.
+
 
 # MASTER
 The problems I had:
