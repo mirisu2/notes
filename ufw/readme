@@ -1,0 +1,65 @@
+https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-14-04
+https://www.digitalocean.com/community/tutorials/ufw-essentials-common-firewall-rules-and-commands
+man ufw - примеры и для маршрутизации трафика через FW
+
+sudo nano /etc/default/ufw
+IPV6=yes
+
+sudo ufw status verbose
+
+# Set Up Default Policies
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+
+sudo ufw allow ssh
+sudo ufw allow http
+sudo ufw allow https
+OR
+sudo ufw allow 22
+sudo ufw allow 80
+sudo ufw allow 443
+
+# Enable UFW
+sudo ufw enable
+
+# Allow Specific Port Ranges
+sudo ufw allow 6000:6007/tcp
+sudo ufw allow 6000:6007/udp
+
+# Allow Specific IP Addresses
+sudo ufw allow from 15.15.15.51
+sudo ufw allow from 15.15.15.51 to any port 22
+
+# Allow Subnets
+sudo ufw allow from 15.15.15.0/24
+sudo ufw allow from 15.15.15.0/24 to any port 22
+
+# Allow Connections to a Specific Network Interface
+sudo ufw allow in on eth0 to any port 80
+sudo ufw allow in on eth1 to any port 3306
+
+sudo ufw allow proto tcp from any to any port 80,443
+* Note that you need to specify the protocol, with proto tcp, when specifying multiple ports.
+
+# Block Outgoing SMTP Mail
+sudo ufw deny out 25
+
+
+# Deny Connections
+sudo ufw deny http
+sudo ufw deny from 15.15.15.51
+sudo ufw deny in on eth0 to 224.0.0.1 proto igmp
+
+# Delete Rules
+sudo ufw status numbered
+sudo ufw delete 2
+OR
+sudo ufw delete allow http
+
+# How To Disable UFW
+sudo ufw disable
+
+# Reset UFW Rules
+sudo ufw reset
+
+
