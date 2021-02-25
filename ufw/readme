@@ -2,6 +2,34 @@ https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-u
 https://www.digitalocean.com/community/tutorials/ufw-essentials-common-firewall-rules-and-commands
 man ufw - примеры и для маршрутизации трафика через FW
 
+USAGE
+       ufw [--dry-run] enable|disable|reload
+
+       ufw [--dry-run] default allow|deny|reject [incoming|outgoing|routed]
+
+       ufw [--dry-run] logging on|off|LEVEL
+
+       ufw [--dry-run] reset
+
+       ufw [--dry-run] status [verbose|numbered]
+
+       ufw [--dry-run] show REPORT
+
+       ufw  [--dry-run] [delete] [insert NUM] allow|deny|reject|limit [in|out] [log|log-all] [ PORT[/PROTOCOL] | APP‐
+       NAME ] [comment COMMENT]
+
+       ufw [--dry-run] [rule] [delete] [insert NUM] allow|deny|reject|limit  [in|out  [on  INTERFACE]]  [log|log-all]
+       [proto  PROTOCOL]  [from  ADDRESS [port PORT | app APPNAME ]] [to ADDRESS [port PORT | app APPNAME ]] [comment
+       COMMENT]
+
+       ufw [--dry-run] route [delete] [insert NUM] allow|deny|reject|limit [in|out on INTERFACE] [log|log-all] [proto
+       PROTOCOL] [from ADDRESS [port PORT | app APPNAME]] [to ADDRESS [port PORT | app APPNAME]] [comment COMMENT]
+
+       ufw [--dry-run] delete NUM
+
+       ufw [--dry-run] app list|info|default|update
+       
+       
 sudo nano /etc/default/ufw
 IPV6=yes
 
