@@ -1,0 +1,42 @@
+# MASTER
+The problems I had:
+
+Keepalived_vrrp[24954]: WARNING - default user 'keepalived_script' for script execution does not exist - please create.
+sudo useradd -M keepalived_script
+
+Keepalived_vrrp[25223]: WARNING - script `pidof` resolved by path search to `/usr/sbin/pidof`. Please specify full path.
+script "/usr/sbin/pidof haproxy"
+
+
+vrrp_script check_haproxy {
+  script "/usr/sbin/pidof haproxy"
+  interval 2
+  weight 2
+}
+
+vrrp_instance inside_network {
+  state MASTER
+  interface eth0
+  virtual_router_id 38
+  priority 99
+  preempt
+  advert_int 1
+  virtual_ipaddress {
+    172.26.8.97/32 dev eth0 label eth0:1
+  }
+  track_script {
+    check_haproxy
+  }
+}
+
+# BACKUP
+vrrp_instance inside_network {
+        state BACKUP
+        interface eth0
+        virtual_router_id 38
+        priority 100
+        advert_int 1
+        virtual_ipaddress {
+                172.26.8.97/32 dev eth0 label eth0:1
+        }
+}
