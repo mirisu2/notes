@@ -1,0 +1,42 @@
+DOCS:
+https://docs.nginx.com/nginx/admin-guide/load-balancer/tcp-udp-load-balancer/
+https://docs.nginx.com/nginx/admin-guide/load-balancer/using-proxy-protocol/
+https://docs.nginx.com/nginx/admin-guide/installing-nginx/installing-nginx-open-source/
+
+cat /etc/yum.repos.d/nginx.repo
+[nginx]
+name=nginx repo
+baseurl=https://nginx.org/packages/mainline/rhel/7Server/$basearch/
+gpgcheck=0
+enabled=1
+yum remove nginx
+yum install nginx
+
+/etc/nginx/nginx.conf
+http {
+  server {
+    ...
+  }
+}
+stream {
+  log_format basic '$proxy_protocol_addr - $remote_addr [$time_local] '
+				           '$protocol $status $bytes_sent $bytes_received '
+				           '$session_time';
+  access_log /var/log/nginx/access_log basic;
+  
+  server {
+	  listen 587 proxy_protocol;
+	  proxy_protocol on;
+	  proxy_pass stream_backend;
+	  set_real_ip_from 100.65.0.0/16;
+  }
+  upstream stream_backend {
+	  server 192.168.2.56:32430;
+	  server 192.168.2.57:32430;
+	  server 192.168.2.58:32430;
+	  server 192.168.2.59:32430;
+  }
+}
+
+nginx -V
+nginx -V 2>&1 | grep -- 'stream_realip_module
