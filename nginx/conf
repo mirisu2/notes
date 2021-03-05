@@ -127,3 +127,19 @@ stream {
 	server 192.168.2.59:32430;
   }
 }
+
+
+# https://nginx.org/ru/docs/beginners_guide.html
+# сервер, который будет перенаправлять все запросы, кроме запросов статических изображений, на проксируемый сервер, 
+# работающий по адресу localhost:9000, по протоколу FastCGI.
+server {
+    location / {
+        fastcgi_pass  localhost:9000;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param QUERY_STRING    $query_string;
+    }
+
+    location ~ \.(gif|jpg|png)$ {
+        root /data/images;
+    }
+}
