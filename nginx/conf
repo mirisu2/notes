@@ -1,6 +1,6 @@
 # https://nginx.org/ru/docs/ngx_core_module.html
 # https://nginx.org/ru/docs/beginners_guide.html
-
+# https://nginx.org/ru/docs/http/ngx_http_proxy_module.html
 
 stop — быстрое завершение
 quit — плавное завершение
