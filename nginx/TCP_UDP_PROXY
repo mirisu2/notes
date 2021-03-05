@@ -25,6 +25,11 @@ stream {
   access_log /var/log/nginx/access_log basic;
   
   server {
+    listen 53 udp;
+    # ...
+  } 
+  
+  server {
 	  listen 587 proxy_protocol;
 	  proxy_protocol on;
 	  proxy_pass stream_backend;
