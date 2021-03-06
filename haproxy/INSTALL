@@ -41,6 +41,26 @@ useradd -g 188 -u 188 -d /var/lib/haproxy -s /sbin/nologin -c haproxy haproxy
 
 cp /opt/haproxy-2.3.6/contrib/systemd/haproxy.service.in /etc/systemd/system/multi-user.target.wants/haproxy.service
 
+[Unit]
+Description=HAProxy Load Balancer
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Environment="CONFIG=/etc/haproxy/haproxy.conf" "PIDFILE=/run/haproxy.pid" "EXTRAOPTS=-S /run/haproxy-master.sock"
+ExecStartPre=/usr/local/sbin/haproxy -f $CONFIG -c -q $EXTRAOPTS
+ExecStart=/usr/local/sbin/haproxy -Ws -f $CONFIG -p $PIDFILE $EXTRAOPTS
+ExecReload=/usr/local/sbin/haproxy -f $CONFIG -c -q $EXTRAOPTS
+ExecReload=/bin/kill -USR2 $MAINPID
+KillMode=mixed
+Restart=always
+SuccessExitStatus=143
+Type=notify
+
+[Install]
+WantedBy=multi-user.target
+
+
 mkdir /etc/haproxy
 vi /etc/haproxy/haproxy.conf
 ################################################
