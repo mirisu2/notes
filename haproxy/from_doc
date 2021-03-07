@@ -1,0 +1,41 @@
+A regular Unix process is generally granted 1024 file descriptors by default, and a privileged process can raise this limit itself. 
+This is one reason for starting HAProxy as **root** and letting it adjust the limit. The computation is based on the global
+maxconn parameter which limits the total number of connections per process, the number of listeners, the number of servers which have a health check enabled,
+the agent checks, the peers, the loggers and possibly a few other technical requirements.
+
+
+HAProxy is designed to isolate itself into a chroot jail during startup, where it cannot perform any file-system access at all. 
+I generally suggest starting HAProxy as **root** because it can then jail itself in a chroot and drop all of its privileges before starting the instances. 
+This is not possible if it is not started as root because only root can execute chroot(), contrary to what some admins believe.
+
+HAProxy will need to be started as **root** in order to:
+  - adjust the file descriptor limits
+  - bind to privileged port numbers
+  - bind to a specific network interface
+  - transparently listen to a foreign address
+  - isolate itself inside the chroot jail
+  - drop to another non-privileged UID
+
+
+
+
+A safe configuration will have :
+
+  - a chroot statement pointing to an empty location without any access
+    permissions. This can be prepared this way on the UNIX command line :
+
+      # mkdir /var/empty && chmod 0 /var/empty || echo "Failed"
+
+    and referenced like this in the HAProxy configuration's global section :
+
+      chroot /var/empty
+
+  - both a uid/user and gid/group statements in the global section :
+
+      user haproxy
+      group haproxy
+
+  - a stats socket whose mode, uid and gid are set to match the user and/or
+    group allowed to access the CLI so that nobody may access it :
+
+      stats socket /var/run/haproxy.stat uid hatop gid hatop mode 600
