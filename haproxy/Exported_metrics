@@ -205,3 +205,31 @@
 | haproxy_server_used_connections_current            | Current number of connections in use.                                     |
 | haproxy_server_need_connections_current            | Estimated needed number of connections.                                   |
 +----------------------------------------------------+---------------------------------------------------------------------------+
+
+
+Mapping of health check status :
+
+   0 : HCHK_STATUS_UNKNOWN  (Unknown)
+   1 : HCHK_STATUS_INI      (Initializing)
+
+   4 : HCHK_STATUS_HANA     (Health analyze detected enough consecutive errors)
+
+   5 : HCHK_STATUS_SOCKERR  (Socket error)
+
+   6 : HCHK_STATUS_L4OK     (L4 check passed, for example tcp connect)
+   7 : HCHK_STATUS_L4TOUT   (L4 timeout)
+   8 : HCHK_STATUS_L4CON    (L4 connection problem)
+
+   9 : HCHK_STATUS_L6OK     (L6 check passed)
+  10 : HCHK_STATUS_L6TOUT   (L6 (SSL) timeout)
+  11 : HCHK_STATUS_L6RSP    (L6 invalid response - protocol error)
+
+  12 : HCHK_STATUS_L7TOUT   (L7 (HTTP/SMTP) timeout)
+  13 : HCHK_STATUS_L7RSP    (L7 invalid response - protocol error)
+  15 : HCHK_STATUS_L7OKD    (L7 check passed)
+  16 : HCHK_STATUS_L7OKCD   (L7 check conditionally passed)
+  17 : HCHK_STATUS_L7STS    (L7 response error, for example HTTP 5xx)
+
+  18 : HCHK_STATUS_PROCERR  (External process check failure)
+  19 : HCHK_STATUS_PROCTOUT (External process check timeout)
+  20 : HCHK_STATUS_PROCOK   (External process check passed)
