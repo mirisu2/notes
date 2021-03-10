@@ -142,4 +142,7 @@ backend kube-apiserver
     server controller-3 172.16.16.163:6443 check
 ################################################
 
-systemctl daemon-reload && systemctl enable haproxy && systemctl start haproxy
+systemctl daemon-reload 
+systemctl enable haproxy
+systemctl start haproxy
+
