@@ -1,6 +1,5 @@
 # Preparing
-yum groupinstall "Development Tools"
-yum install -y wget readline-devel pcre-devel openssl-devel systemd-devel
+yum install -y wget gcc make readline-devel pcre-devel openssl-devel systemd-devel
 
 # Get haproxy
 cd /opt
