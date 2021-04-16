@@ -20,6 +20,8 @@ script "/usr/sbin/pidof haproxy"
 
 vrrp_script check_haproxy {
   script "/usr/sbin/pidof haproxy"
+  OR
+  script "/usr/bin/killall -0 haproxy"
   interval 2
   weight 2
 }
