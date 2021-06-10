@@ -22,3 +22,7 @@ xpack.security.transport.ssl.verification_mode: certificate
 xpack.security.transport.ssl.keystore.path: /etc/elasticsearch/elastic-certificates.p12
 xpack.security.transport.ssl.truststore.path: /etc/elasticsearch/elastic-stack-ca.p12
 
+# https://www.elastic.co/guide/en/kibana/current/configuring-tls.html
+# https://www.elastic.co/guide/en/elasticsearch/reference/7.13/configuring-stack-security.html
+# https://www.elastic.co/guide/en/elasticsearch/reference/7.13/security-basic-setup.html
+# elastic.co/guide/en/elasticsearch/reference/7.13/security-minimal-setup.html
