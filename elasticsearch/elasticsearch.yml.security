@@ -22,7 +22,26 @@ xpack.security.transport.ssl.verification_mode: certificate
 xpack.security.transport.ssl.keystore.path: /etc/elasticsearch/elastic-certificates.p12
 xpack.security.transport.ssl.truststore.path: /etc/elasticsearch/elastic-stack-ca.p12
 
+#############################################
+# Restricting connections with IP filtering #
+#############################################
+xpack.security.transport.filter.allow: "192.168.0.1"
+xpack.security.transport.filter.deny: "192.168.0.0/24"
+# OR
+xpack.security.transport.filter.allow: [ "192.168.0.1", "192.168.0.2", "192.168.0.3", "192.168.0.4" ]
+xpack.security.transport.filter.deny: _all
+# IPv6
+xpack.security.transport.filter.allow: "2001:0db8:1234::/48"
+xpack.security.transport.filter.deny: "1234:0db8:85a3:0000:0000:8a2e:0370:7334"
+# DNS
+xpack.security.transport.filter.allow: localhost
+xpack.security.transport.filter.deny: '*.google.com'
+# Disabling IP Filtering
+xpack.security.transport.filter.enabled: false
+xpack.security.http.filter.enabled: true
+
 # https://www.elastic.co/guide/en/kibana/current/configuring-tls.html
 # https://www.elastic.co/guide/en/elasticsearch/reference/7.13/configuring-stack-security.html
 # https://www.elastic.co/guide/en/elasticsearch/reference/7.13/security-basic-setup.html
 # elastic.co/guide/en/elasticsearch/reference/7.13/security-minimal-setup.html
+
