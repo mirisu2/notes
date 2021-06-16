@@ -15,8 +15,10 @@ action.destructive_requires_name: true
 # The ES_PATH_CONF variable is the path for the Elasticsearch configuration files.
 # ./bin/elasticsearch-setup-passwords (auto | interactive)
 # Пароль не задать пока не будут активированы:
-xpack.security.enabled: true
-xpack.security.transport.ssl.enabled: true
+
+  xpack.security.enabled: true
+  xpack.security.transport.ssl.enabled: true
+
 # Иначе получаем ошибку
 Unexpected response code [500] from calling GET http://172.16.16.193:9200/_security/_authenticate?pretty
 It doesn't look like the X-Pack security feature is enabled on this Elasticsearch node.
@@ -52,12 +54,61 @@ ERROR: X-Pack Security is disabled by configuration.
 # OUTPUT: elastic-certificates.p12
 # (!) Copy the elastic-certificates.p12 file to the ES_PATH_CONF directory on every node in your cluster.
 
-xpack.security.transport.ssl.verification_mode: certificate
-xpack.security.transport.ssl.client_authentication: required
-xpack.security.transport.ssl.keystore.path: /etc/elasticsearch/elastic-certificates.p12
-xpack.security.transport.ssl.truststore.path: /etc/elasticsearch/elastic-certificates.p12
+    xpack.security.transport.ssl.verification_mode: certificate
+    xpack.security.transport.ssl.client_authentication: required
+    xpack.security.transport.ssl.keystore.path: /etc/elasticsearch/elastic-certificates.p12
+    xpack.security.transport.ssl.truststore.path: /etc/elasticsearch/elastic-certificates.p12
+    xpack.security.http.ssl.enabled: true
+    xpack.security.http.ssl.keystore.path: /etc/elasticsearch/http.p12
 
+sudo /usr/share/elasticsearch/bin/elasticsearch-certutil ca
+sudo mv /usr/share/elasticsearch/elastic-stack-ca.p12 ~/
 
+sudo /usr/share/elasticsearch/bin/elasticsearch-certutil cert --ca ~/elastic-stack-ca.p12
+sudo mv /usr/share/elasticsearch/elastic-certificates.p12 ~/
+
+sudo cp ~/elastic-certificates.p12 /etc/elasticsearch/
+sudo chown root:elasticsearch /etc/elasticsearch/elastic-certificates.p12
+sudo chmod 660 /etc/elasticsearch/elastic-certificates.p12
+
+sudo /usr/share/elasticsearch/bin/elasticsearch-certutil http
+sudo mv /usr/share/elasticsearch/elasticsearch-ssl-http.zip ~/
+unzip elasticsearch-ssl-http.zip
+
+kibana/
+├── elasticsearch-ca.pem
+├── README.txt
+└── sample-kibana.yml
+
+elasticsearch
+├── http.p12
+├── README.txt
+└── sample-elasticsearch.yml
+
+sudo cp elasticsearch/http.p12 /etc/elasticsearch/
+sudo chown root:elasticsearch /etc/elasticsearch/http.p12
+sudo chmod 660 /etc/elasticsearch/http.p12
+
+[user@es-3 ~]$ curl -k -v https://172.16.16.191:9200/?pretty -u elastic:3w4h934h
+
+[user@orc:~$] sudo cp elasticsearch-ca.pem /etc/kibana/
+[user@orc:~$] sudo cat /etc/kibana/kibana.yml
+	server.port: 5601
+	server.host: "172.16.16.253"
+	server.name: "your-hostname"
+	elasticsearch.hosts: [ "https://es-1:9200", "https://es-2:9200", "https://es-3:9200" ]
+	elasticsearch.username: "kibana_system"
+	elasticsearch.password: "u34g9u34g"
+	elasticsearch.ssl.certificateAuthorities: [ "/etc/kibana/elasticsearch-ca.pem" ]
+	elasticsearch.ssl.verificationMode: none
+	kibana.index: ".kibana-orc"
+	server.ssl.enabled: true
+	server.ssl.certificate: "/etc/kibana/kibana-local.3cp0.ru.cer"
+	server.ssl.key: "/etc/kibana/kibana-local.3cp0.ru.key"
+	logging.verbose: true
+	logging.root.level: debug
+	i18n.locale: "en"
+  
 #############################################
 # Restricting connections with IP filtering #
 #############################################
