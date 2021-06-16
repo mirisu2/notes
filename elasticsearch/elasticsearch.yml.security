@@ -1,23 +1,30 @@
 cluster.name: external
-
 node.name: es-02
 #node.attr.rack: r1
-
 path.data: /elasticsearch/01, /elasticsearch/02, /elasticsearch/03
 path.logs: /var/log/elasticsearch
-
 #bootstrap.memory_lock: true
-
 network.host: 192.168.51.192
-
 discovery.seed_hosts: ["192.168.51.191", "192.168.51.192", "192.168.51.193"]
-
 cluster.initial_master_nodes: ["192.168.51.192", "192.168.51.193"]
-
 action.destructive_requires_name: true
 
+#### Minimal
+# (!) When you use the basic license, the Elasticsearch security features are disabled by default. https://www.elastic.co/guide/en/elasticsearch/reference/7.13/security-minimal-setup.html
+# The ES_PATH_CONF variable is the path for the Elasticsearch configuration files.
+# ./bin/elasticsearch-setup-passwords (auto | interactive)
 xpack.security.enabled: true
 xpack.security.transport.ssl.enabled: true
+# (!) When the Elasticsearch security features are enabled, users must log in to Kibana with a valid username and password.
+# KIB_PATH_CONF/kibana.yml
+# elasticsearch.username: "kibana_system"
+# ./bin/kibana-keystore create && ./bin/kibana-keystore add elasticsearch.password
+# Log in to Kibana as the elastic user. Use this superuser account to manage spaces, create new users, and assign roles. 
+
+#### Basic
+# After adding password protection in the minimal security configuration, you’ll need to configure Transport Layer Security (TLS). 
+# The transport layer handles all internal communication between nodes in your cluster.
+# (!) If your cluster has multiple nodes, then you must configure TLS between nodes. Production mode clusters will not start if you do not enable TLS.
 xpack.security.transport.ssl.verification_mode: certificate
 xpack.security.transport.ssl.keystore.path: /etc/elasticsearch/elastic-certificates.p12
 xpack.security.transport.ssl.truststore.path: /etc/elasticsearch/elastic-stack-ca.p12
