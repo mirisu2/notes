@@ -27,8 +27,10 @@ ERROR: X-Pack Security is disabled by configuration.
 # (!) When the Elasticsearch security features are enabled, users must log in to Kibana with a valid username and password.
 # KIB_PATH_CONF/kibana.yml
 # elasticsearch.username: "kibana_system"
+# elasticsearch.password: "d38u4hj5g8304hg"
+# OR
 # ./bin/kibana-keystore create && ./bin/kibana-keystore add elasticsearch.password
-# Log in to Kibana as the elastic user. Use this superuser account to manage spaces, create new users, and assign roles. 
+# Log in to Kibana as the `elastic` user. Use this superuser account to manage spaces, create new users, and assign roles. 
 
 #### Basic
 # After adding password protection in the minimal security configuration, you’ll need to configure Transport Layer Security (TLS). 
