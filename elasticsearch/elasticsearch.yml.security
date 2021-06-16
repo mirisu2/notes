@@ -15,6 +15,7 @@ action.destructive_requires_name: true
 # ./bin/elasticsearch-setup-passwords (auto | interactive)
 xpack.security.enabled: true
 xpack.security.transport.ssl.enabled: true
+
 # (!) When the Elasticsearch security features are enabled, users must log in to Kibana with a valid username and password.
 # KIB_PATH_CONF/kibana.yml
 # elasticsearch.username: "kibana_system"
