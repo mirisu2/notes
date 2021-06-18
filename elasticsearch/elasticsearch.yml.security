@@ -12,6 +12,7 @@ action.destructive_requires_name: true
 #### Minimal
 # (!) When you use the basic license, the Elasticsearch security features are disabled by default. 
 # https://www.elastic.co/guide/en/elasticsearch/reference/7.13/security-minimal-setup.html
+# https://www.elastic.co/guide/en/elasticsearch/reference/current/built-in-users.html
 # The ES_PATH_CONF variable is the path for the Elasticsearch configuration files.
 # ./bin/elasticsearch-setup-passwords (auto | interactive)
 # Пароль не задать пока не будут активированы:
