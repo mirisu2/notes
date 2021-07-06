@@ -1,5 +1,6 @@
 [Переменные](https://ansible-for-network-engineers.readthedocs.io/ru/latest/book/02_playbook_basics/variables.html)  
-Docs » User Guide » Working with command line tools » [ansible-playbook](https://docs.ansible.com/ansible/latest/cli/ansible-playbook.html)
+Docs » User Guide » Working with command line tools » [ansible-playbook](https://docs.ansible.com/ansible/latest/cli/ansible-playbook.html)  
+Docs » User Guide » Working with playbooks » Templating (Jinja2) » [Using filters to manipulate data](https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html)
 ```
 ansible all -i kubernetes_inventory.yml -m shell -a 'timedatectl set-time 2021-01-26 15:30:00'
 ansible all -i kubernetes_inventory.yml -m shell -a 'timedatectl set-time 15:30:00'
