@@ -161,7 +161,7 @@ There are another 3 special keywords for tags: `tagged`, `untagged` and `all`, w
 * include params
 * extra vars (always win precedence)
 
-## [Roles](https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html#playbooks-reuse-roles)
+## [Roles](https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html#playbooks-reuse-roles) | [Самойленко](https://ansible-for-network-engineers.readthedocs.io/ru/latest/book/07_playbooks/roles.html)
 * **tasks** - contains the main list of tasks to be executed by the role.
 * **handlers** - contains handlers, which may be used by this role or even anywhere outside this role.
 * **defaults** - default variables for the role (see Using Variables for more information).
