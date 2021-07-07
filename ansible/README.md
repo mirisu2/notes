@@ -1,4 +1,6 @@
 [Переменные](https://ansible-for-network-engineers.readthedocs.io/ru/latest/book/02_playbook_basics/variables.html)  
+[Special Variables](https://docs.ansible.com/ansible/latest/reference_appendices/special_variables.html)  
+[stat – Retrieve file or file system status](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/stat_module.html)  
 Docs » User Guide » Working with command line tools » [ansible-playbook](https://docs.ansible.com/ansible/latest/cli/ansible-playbook.html)  
 Docs » User Guide » Working with playbooks » Templating (Jinja2) » [Using filters to manipulate data](https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html)  
 Docs » User Guide » [Advanced Syntax](https://docs.ansible.com/ansible/latest/user_guide/playbooks_advanced_syntax.html#yaml-anchors-and-aliases-sharing-variable-values)
